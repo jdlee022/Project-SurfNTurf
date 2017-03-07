@@ -1,0 +1,22 @@
+/** ONLY WRITE STYLES IN THE SCSS FILE. NOT CSS
+ *
+ * Install SASS: http://sass-lang.com/install
+ * Sass guide: http://sass-lang.com/guide
+ * 
+ * Once Sass is installed navigate to assets/css and run "sass --watch ."
+ * this will automatically generate the code in style.css whenever you save the code you've
+ * added to style.scss.
+*/
+
+//Example (delete later)
+$font-stack:    Helvetica, sans-serif;
+$primary-color: #0095b7;
+
+body {
+  font: 100% $font-stack;
+  color: orange;
+
+  h1{
+    color: $primary-color;
+  }
+}
