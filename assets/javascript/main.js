@@ -10,3 +10,7 @@ firebase.initializeApp(config);
 
 var database = firebase.database();
 
+//get weather
+
+
+
