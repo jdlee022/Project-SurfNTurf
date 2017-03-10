@@ -13,4 +13,25 @@ var database = firebase.database();
 //get weather
 
 
+//GET CURRENT LOCATION IN LONGTITUDE AND LATITUDE
+var currentLot = {
+    lat: null,
+    lng: null
+            }; 
+function initMap() {
+    if (navigator.geolocation){
+      	navigator.geolocation.getCurrentPosition( function(position){
+      	currentLot = {
+      		lat: position.coords.latitude,
+    	  	lng: position.coords.longitude
+    	};
+    	console.log("Latitude: " + currentLot.lat + ". Longitude: " + currentLot.lng);
+    	})
+    }
+  else {
+      // Browser doesn't support Geolocation. Ask user to input location
+        prompt('Please input your location');
+  	}	
+	}
+
 
