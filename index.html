@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <!--
 workflow:
 When you have working code that you are ready to push:
@@ -6,8 +7,8 @@ When you have working code that you are ready to push:
 	3.	git commit -m “”
 	4.	git pull
 	5.	git push origin develop
-    -->
-<!DOCTYPE html>
+-->
+
 <html lang="en">
 
 <head>
@@ -26,6 +27,7 @@ When you have working code that you are ready to push:
     <h1>Surf N' Turf</h1>
 
     <h2>testing develop branch</h2>
+    <button type="btn" id="test">test</button>
     
 
 
@@ -34,13 +36,14 @@ When you have working code that you are ready to push:
 
     <!--JQuery-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    
     <!--Geolocation API  -->
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwybo5XEokSVDqS_jmsKMpOshEhVCHUVA&callback=initMap"></script>
+    <!--<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwybo5XEokSVDqS_jmsKMpOshEhVCHUVA&callback=initMap"></script>-->
+    <!-- Google Locations API-->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwybo5XEokSVDqS_jmsKMpOshEhVCHUVA&libraries=places"></script>
     <!--Firebase-->
     <script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
-    <!-- Google Locations API-->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6XFex__bxEnlgxRLl4jEbps5sVgE4v24&libraries=places"></script>
+    
     <!--Local JS-->
     <script src="assets/javascript/main.js" type="text/javascript"></script>
     <script src="assets/javascript/surf.js" type="text/javascript"></script>
