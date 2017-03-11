@@ -10,17 +10,18 @@ var config = {
 firebase.initializeApp(config);
 var database = firebase.database();
 
-
 /** Check if value is a number */
 function isNumber(o) {
     return !isNaN(o - 0) && o !== null && o !== "" && o !== false;
 }
 
-function getWeather(lat, lng){
+function getWeather(){
+    var apikeyid = "166a433c57516f51dfab1f7edaed8413";
 	var queryURL = "https://api.openweathermap.org/data/2.5/weather?"
-		+ "lat=" + lat 
-		+ "&lon=" + lng 
-		+ "&appid=eb3f27114445b4659aab2c8fd7a8fa5d";
+		// + "lat=" + lat 
+		// + "&lon=" + lng 
+        + "q=Bujumbura,Burundi&units=imperial"
+		+ "&appid=" + apikeyid;
 	console.log(queryURL);
 	$.ajax({
 		url: queryURL,
@@ -105,5 +106,6 @@ $(document).ready(function () {
     $("#test").on("click", function () {
         //FIXME: Does not work unless you wait ~4 seconds for initMap() to finish getting location
         initializePlaces(currentLot.lat, currentLot.lng);
+        getWeather();
     });
 });
