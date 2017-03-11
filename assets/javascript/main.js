@@ -1,3 +1,4 @@
+//FUNCTIONS 
 
 // Initialize Firebase
 var config = {
@@ -15,12 +16,11 @@ function isNumber(o) {
     return !isNaN(o - 0) && o !== null && o !== "" && o !== false;
 }
 
-function getWeather(){
-    var apikeyid = "166a433c57516f51dfab1f7edaed8413";
-	var queryURL = "https://api.openweathermap.org/data/2.5/weather?"
-		// + "lat=" + lat 
-		// + "&lon=" + lng 
-        + "q=Bujumbura,Burundi&units=imperial"
+function getWeather(lat, lng){
+    var apikeyid = "eb3f27114445b4659aab2c8fd7a8fa5d";
+	var queryURL = "http://api.openweathermap.org/data/2.5/weather?"
+		+ "lat=" + lat 
+		+ "&lon=" + lng 
 		+ "&appid=" + apikeyid;
 	console.log(queryURL);
 	$.ajax({
@@ -34,24 +34,27 @@ function getWeather(){
 
 
 //get current location and store it in currentLot object
-var currentLot = {
-    lat: null,
-    lng: null
-};
+
 /** Call this to get current location and store lat & lng in currentLot */
 function initMap() {
     //if browser supports current location then store it in currentLot, else get from user input
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function (position) {
+        navigator.geolocation.getCurrentPosition(function (position) { 
             currentLot = {
                 lat: position.coords.latitude,
-                lng: position.coords.longitude
+                lng: position.coords.longitude,
+                switch : true
             };
             console.log("initMap Latitude: " + currentLot.lat + ". Longitude: " + currentLot.lng);
+            if(currentLot.switch){
+                initializePlaces(currentLot.lat, currentLot.lng);
+                getWeather(currentLot.lat, currentLot.lng);
+            }
         });
     } else {
         //TODO: if unable to get current location then prompt user to enter one manually
         prompt('Please input your location');
+        
     }
 }
 
@@ -98,14 +101,3 @@ function callback(results, status) {
 
 
 
-$(document).ready(function () {
-    //call initMap() when page loads
-    initMap();
-
-    //get places when button is pressed
-    $("#test").on("click", function () {
-        //FIXME: Does not work unless you wait ~4 seconds for initMap() to finish getting location
-        initializePlaces(currentLot.lat, currentLot.lng);
-        getWeather();
-    });
-});
