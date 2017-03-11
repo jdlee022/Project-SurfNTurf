@@ -50,6 +50,7 @@ var service;
 var infowindow;
 //global variable used to store list of places relevant to current location
 var places = [];
+var placesDetails = [];
 /** gets places based on given lat & lng */
 function initializePlaces(lat, lng) {
     //check if valid lat and lng were given
@@ -86,38 +87,58 @@ function searchCallback(results, status) {
             var place = results[i];
 
             //add a new place object to the places array
-            places.push({
+            var thisPlace = {
                 location: place.geometry.location,
                 placeId: place.place_id,
                 name: place.name,
                 url: place.url,
                 //need to update photos after calling getDetails with this place's id
                 photos: null
-            });
+            };
 
-            //call getDetails using id for current place
+            //GET details for the current place
             var detailsRequest = {
                 placeId: place.place_id
             };
-            //GET details (refer to detailsCallback function)
-            service.getDetails(detailsRequest, detailsCallback);
-            //TODO: figure out how to add the returned photos from the above getDetails() call to the current place's data.
-            //Not sure if this should be updated here or in the detailsCallback() function
+            //service.getDetails(request, callback);
+            service.getDetails(detailsRequest, function(place, status) {
+                detailsCallback(place, status, thisPlace);
+            });
 
             //log the current place and then the global array of place objects
             console.log(place);
-            console.log(places);
-            counter++;
         }
     }
+    
+    setTimeout(function() {
+        console.log("-------------------------------");
+        console.log("PLACES:");
+        console.log(places);
+        console.log("place0 img0: " + places[0].photos[0].getUrl({'maxWidth': 4000, 'maxHeight': 4000}));
+        console.log("place0 img1: " + places[0].photos[1].getUrl({'maxWidth': 4000, 'maxHeight': 4000}));
+        console.log("place1 img0: " + places[1].photos[0].getUrl({'maxWidth': 4000, 'maxHeight': 4000}));
+        console.log("place1 img1: " + places[1].photos[1].getUrl({'maxWidth': 4000, 'maxHeight': 4000}));
+        console.log("-------------------------------");
+    }, 1000);
 }
 
 /** Get the photos from the details returned and update the photos attribute for the corresponding place object in the places[] array */
-function detailsCallback(place, status) {
+function detailsCallback(place, status, newPlace) {
+    //console.log(thisPlace);
     if (status == google.maps.places.PlacesServiceStatus.OK) {
         //places[counter].photos = place.photos;
         console.log("photos for " + place.name + ":");
         console.log(place.photos);
+        // placesDetails.push({
+        //     name: place.name,
+        //     photos: place.photos
+        // });
+        //photosArr[counter] = place.photos;
+        //counter++;
+
+        newPlace.photos = place.photos;
+        newPlace.url = place.url;
+        places.push(newPlace);
     }
 }
 
