@@ -12,7 +12,6 @@ var searchLocation = {
     switch : false
 };
 
-var 
 
 var surfSpot = {
     name: null,

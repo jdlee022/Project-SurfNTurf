@@ -43,6 +43,7 @@ function initMap() {
             currentLot = {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude,
+                switch: true
             };
             console.log("initMap Latitude: " + currentLot.lat + ". Longitude: " + currentLot.lng);
             if(currentLot.switch){
