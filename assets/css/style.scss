@@ -12,11 +12,46 @@
 $font-stack:    Helvetica, sans-serif;
 $primary-color: #0095b7;
 
+html,
 body {
-  font: 100% $font-stack;
-  color: orange;
+    height: 100%;
+}
 
-  h1{
-    color: $primary-color;
-  }
+.carousel,
+.item,
+.active {
+    height: 100%;
+}
+
+.carousel-inner {
+    height: 100%;
+    
+}
+
+/* Background images are set within the HTML using inline CSS, not here */
+
+.fill {
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+footer {
+    margin: 50px 0;
+}
+
+div#content-box {
+  position: fixed;
+  bottom: 25px;
+  left: 25px;
+  height: 200px;
+  width: 400px;
+  border-radius: 10px;
+  background-color: black;
+  opacity: 0.75;
+  box-shadow: 0 0 10px 5px black;
 }
