@@ -43,7 +43,6 @@ function initMap() {
             currentLot = {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude,
-                switch : true
             };
             console.log("initMap Latitude: " + currentLot.lat + ". Longitude: " + currentLot.lng);
             if(currentLot.switch){
@@ -59,9 +58,12 @@ function initMap() {
 }
 
 // TEXT SEARCH request
+var counter = 0;
 var map;
 var service;
 var infowindow;
+//global variable used to store list of places relevant to current location
+var places = [];
 /** gets places based on given lat & lng */
 function initializePlaces(lat, lng) {
     //check if valid lat and lng were given
@@ -73,31 +75,64 @@ function initializePlaces(lat, lng) {
             zoom: 15
         });
         //set data that determines what is returned
-        var request = {
+        var textRequest = {
             location: pyrmont,
             radius: '500',
             query: 'hiking'
         };
 
         service = new google.maps.places.PlacesService(map);
-        service.textSearch(request, callback);
+        //GET the data (see searchCallBack function)
+        service.textSearch(textRequest, searchCallback);
     } else {
         //TODO: if invalid lat & lng were provided then do something
-        alert("could not get current location, please search a place");
+        alert("Error: invalid lat & lng passed to initializePlaces");
     }
 }
 /** Handles the data that is returned by google places */
-function callback(results, status) {
+function searchCallback(results, status) {
+    //empty places array when new location is searched
+    places = [];
     if (status == google.maps.places.PlacesServiceStatus.OK) {
         //DO STUFF IN HERE TO ACCESS EACH PLACE
         for (var i = 0; i < results.length; i++) {
+            //get the ith place object
             var place = results[i];
 
-            //TODO: create array of place objects with relative data
+            //add a new place object to the places array
+            places.push({
+                location: place.geometry.location,
+                placeId: place.place_id,
+                name: place.name,
+                url: place.url,
+                //need to update photos after calling getDetails with this place's id
+                photos: null
+            });
+
+            //call getDetails using id for current place
+            var detailsRequest = {
+                placeId: place.place_id
+            };
+            //GET details (refer to detailsCallback function)
+            service.getDetails(detailsRequest, detailsCallback);
+            //TODO: figure out how to add the returned photos from the above getDetails() call to the current place's data.
+            //Not sure if this should be updated here or in the detailsCallback() function
+
+            //log the current place and then the global array of place objects
             console.log(place);
+            console.log(places);
+            counter++;
         }
     }
 }
 
+/** Get the photos from the details returned and update the photos attribute for the corresponding place object in the places[] array */
+function detailsCallback(place, status) {
+    if (status == google.maps.places.PlacesServiceStatus.OK) {
+        //places[counter].photos = place.photos;
+        console.log("photos for " + place.name + ":");
+        console.log(place.photos);
+    }
+}
 
 
