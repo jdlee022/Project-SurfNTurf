@@ -1,15 +1,15 @@
 //FUNCTIONS 
 
 // Initialize Firebase
-var config = {
-    apiKey: "AIzaSyABAurtLfnJD7fa63YfFAXgrM3wl2u7A84",
-    authDomain: "project-surfnturf.firebaseapp.com",
-    databaseURL: "https://project-surfnturf.firebaseio.com",
-    storageBucket: "project-surfnturf.appspot.com",
-    messagingSenderId: "948418625999"
-};
-firebase.initializeApp(config);
-var database = firebase.database();
+// var config = {
+//     apiKey: "AIzaSyABAurtLfnJD7fa63YfFAXgrM3wl2u7A84",
+//     authDomain: "project-surfnturf.firebaseapp.com",
+//     databaseURL: "https://project-surfnturf.firebaseio.com",
+//     storageBucket: "project-surfnturf.appspot.com",
+//     messagingSenderId: "948418625999"
+// };
+// firebase.initializeApp(config);
+// var database = firebase.database();
 
 /** Check if value is a number */
 function isNumber(o) {
@@ -46,6 +46,7 @@ function initMap() {
                 switch: true
             };
             console.log("initMap Latitude: " + currentLot.lat + ". Longitude: " + currentLot.lng);
+            //Check if the API has returned the user's current location. If so the if statement would run
             if(currentLot.switch){
                 initializePlaces(currentLot.lat, currentLot.lng);
                 getWeather(currentLot.lat, currentLot.lng);
@@ -110,18 +111,23 @@ function searchCallback(results, status) {
                 photos: null
             });
 
+            console.log(places[i]);
+
             //call getDetails using id for current place
             var detailsRequest = {
                 placeId: place.place_id
             };
             //GET details (refer to detailsCallback function)
             service.getDetails(detailsRequest, detailsCallback);
+            
+            //places[i]={};
+
             //TODO: figure out how to add the returned photos from the above getDetails() call to the current place's data.
             //Not sure if this should be updated here or in the detailsCallback() function
 
             //log the current place and then the global array of place objects
-            console.log(place);
-            console.log(places);
+            console.log("place: " + place);
+            console.log("places: " + places);
             counter++;
         }
     }
@@ -136,4 +142,16 @@ function detailsCallback(place, status) {
     }
 }
 
+
+// Melissa: I thought the way you get the picture is too use photo reference to get the link to the photo.
+var photoDisplay ={
+    width: 400,
+    reference: null,
+}
+var APIkeygoogle = "AIzaSyBVmCIQ7XJVlIuZPwm1dMoWC8JP7OqqQrE";
+
+var queryURL = "https://maps.googleapis.com/maps/api/place/photo?"
+                + "maxwidth=" + photoDisplay.width
+                + "&photoreference=" + photoDisplay.reference 
+                + "&key=" + APIkeygoogle;
 
