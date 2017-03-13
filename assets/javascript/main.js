@@ -1,20 +1,13 @@
-// Initialize Firebase
-var config = {
-    apiKey: "AIzaSyABAurtLfnJD7fa63YfFAXgrM3wl2u7A84",
-    authDomain: "project-surfnturf.firebaseapp.com",
-    databaseURL: "https://project-surfnturf.firebaseio.com",
-    storageBucket: "project-surfnturf.appspot.com",
-    messagingSenderId: "948418625999"
-};
-firebase.initializeApp(config);
-var database = firebase.database();
-
-
-/** Check if value is a number */
-function isNumber(o) {
-    return !isNaN(o - 0) && o !== null && o !== "" && o !== false;
-}
-
+// TEXT SEARCH request
+var counter = 0;
+var map;
+var service;
+var infowindow;
+//global variable used to store list of places relevant to current location
+var search;
+var places = [];
+var currentPlace;
+var currentPhotos = [];
 
 //used to store current location
 var currentLot = {
@@ -36,26 +29,15 @@ function initMap() {
             if (currentLot.switch) {
                 initializePlaces(currentLot.lat, currentLot.lng);
             }
-        });
+        }, function(){ prompt("please enter a location"); }, {timeout:10000});
     } else {
         //TODO: if unable to get current location then prompt user to enter one manually
         prompt('Please input your location');
     }
 }
 
-// TEXT SEARCH request
-var counter = 0;
-var map;
-var service;
-var infowindow;
-//global variable used to store list of places relevant to current location
-var places = [];
-var currentPlace;
-var currentPhotos = [];
 /** gets places based on given lat & lng */
 function initializePlaces(lat, lng) {
-    //check if valid lat and lng were given
-    if (isNumber(lat) && isNumber(lng)) {
         var pyrmont = new google.maps.LatLng(lat, lng);
 
         map = new google.maps.Map(document.getElementById('map'), {
@@ -72,11 +54,8 @@ function initializePlaces(lat, lng) {
         service = new google.maps.places.PlacesService(map);
         //GET the data (see searchCallBack function)
         service.textSearch(textRequest, searchCallback);
-    } else {
-        //TODO: if invalid lat & lng were provided then do something
-        alert("Error: invalid lat & lng passed to initializePlaces");
-    }
 }
+
 /** Handles the data that is returned by google places */
 function searchCallback(results, status) {
     //empty places array when new location is searched
