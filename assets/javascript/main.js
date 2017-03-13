@@ -143,15 +143,3 @@ function detailsCallback(place, status) {
 }
 
 
-// Melissa: I thought the way you get the picture is too use photo reference to get the link to the photo.
-var photoDisplay ={
-    width: 400,
-    reference: null,
-}
-var APIkeygoogle = "AIzaSyBVmCIQ7XJVlIuZPwm1dMoWC8JP7OqqQrE";
-
-var queryURL = "https://maps.googleapis.com/maps/api/place/photo?"
-                + "maxwidth=" + photoDisplay.width
-                + "&photoreference=" + photoDisplay.reference 
-                + "&key=" + APIkeygoogle;
-
