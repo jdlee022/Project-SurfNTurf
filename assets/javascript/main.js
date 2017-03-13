@@ -1,32 +1,46 @@
-// Initialize Firebase
-var config = {
-    apiKey: "AIzaSyABAurtLfnJD7fa63YfFAXgrM3wl2u7A84",
-    authDomain: "project-surfnturf.firebaseapp.com",
-    databaseURL: "https://project-surfnturf.firebaseio.com",
-    storageBucket: "project-surfnturf.appspot.com",
-    messagingSenderId: "948418625999"
-};
-firebase.initializeApp(config);
-var database = firebase.database();
+//FUNCTIONS 
 
+// Initialize Firebase
+// var config = {
+//     apiKey: "AIzaSyABAurtLfnJD7fa63YfFAXgrM3wl2u7A84",
+//     authDomain: "project-surfnturf.firebaseapp.com",
+//     databaseURL: "https://project-surfnturf.firebaseio.com",
+//     storageBucket: "project-surfnturf.appspot.com",
+//     messagingSenderId: "948418625999"
+// };
+// firebase.initializeApp(config);
+// var database = firebase.database();
 
 /** Check if value is a number */
 function isNumber(o) {
     return !isNaN(o - 0) && o !== null && o !== "" && o !== false;
 }
 
+function getWeather(lat, lng){
+    var apikeyid = "eb3f27114445b4659aab2c8fd7a8fa5d";
+	var queryURL = "http://api.openweathermap.org/data/2.5/weather?"
+		+ "lat=" + lat 
+		+ "&lon=" + lng 
+		+ "&appid=" + apikeyid;
+	console.log(queryURL);
+	$.ajax({
+		url: queryURL,
+		method: 'GET' })
+		.done(function(response){
+			console.log(response);
+		});
+}
 
-//used to store current location
-var currentLot = {
-    lat: null,
-    lng: null
-};
+
+
+//get current location and store it in currentLot object
+
 /** Call this to get current location and store lat & lng in currentLot */
 function initMap() {
    
     //if browser supports current location then store it in currentLot, else get from user input
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function (position) {
+        navigator.geolocation.getCurrentPosition(function (position) { 
             currentLot = {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude,
@@ -34,16 +48,18 @@ function initMap() {
             };
            
             console.log("initMap Latitude: " + currentLot.lat + ". Longitude: " + currentLot.lng);
-            //once current location is loaded, initialize nearby places
-            if (currentLot.switch) {
+            //Check if the API has returned the user's current location. If so the if statement would run
+            if(currentLot.switch){
                 initializePlaces(currentLot.lat, currentLot.lng);
-                
+                getWeather(currentLot.lat, currentLot.lng);
+
+
             }
         }, function(){console.log("error")}, {timeout:5000});
     } else {
         //TODO: if unable to get current location then prompt user to enter one manually
-        prompt('Please input your location');
-        
+        prompt('Please input your location');  
+
     }
 }
 
@@ -100,6 +116,7 @@ function searchCallback(results, status) {
                 //need to update photos after calling getDetails with this place's id
                 photos: null
             };
+            
             places.push(thisPlace);
 
             //log the current place and then the global array of place objects
@@ -127,6 +144,7 @@ function detailsCallback(place, status) {
         console.log(currentPlace);
     }
 }
+
 
 function getPhotos(currentPlace) {
     //GET details for the current place

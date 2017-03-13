@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<link rel = "stylesheet" type = "text/css" href = "assets/css/surf.css">
+	<script src = "https://momentjs.com/downloads/moment.js"></script>
+	<script src = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.js"></script>
+	<script src = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
+	<link rel="stylesheet" href="assets/css/jquery-ui.theme.css">
+	<link rel="stylesheet" href="assets/css/jquery-ui.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="assets/javascript/jquery-ui.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="">
+	<link rel = "stylesheet" type = "text/css" href = "assets/css/surf.css">
+
+	</head>
+
+<body>
+
+<!-- http://www.outdooractive.com/api/project/api-dev-oa/oois/1550935?key=yourtest-outdoora-ctiveapi&lang=en&fallback=false -->
+
+<!-- http://img.oastatic.com/img/1825067/.jpg -->
+
+  </head>
+  <body>
+
+    <div class = "favoritesWrapper">
+	<div class = "row">
+		<div class = "col-sm-3">
+			<div class = "favoritesHeader">
+				<i class = "glyphicon glyphicon-align-justify"></i>
+				<i class = "glyphicon glyphicon-heart"></i> 
+				<div class = "favoritesHeaderText"> Times Favorited:</div>
+			</div>
+		</div>
+	</div>
+	<div class = "row">
+			<div class = "col-sm-3">
+				<div class = "favoritesContentArea">
+				<p>1. Spot Name</p>
+				</div>
+			</div>
+	</div>
+    </div>
+	
+	<div class = "row">
+    	<div class = "display"> 
+	    <div class = "col-sm-3">
+	   		<div class = "infoBar">
+		    	<div class = "spotName">
+		    	</div>			
+				<div class = "row">
+					<div class = "detailsWrapper">
+					   <div class = "col-sm-3">
+						   <div class = "waterTemp"></div>
+					   </div>
+					   <div class = "col-sm-3">
+						   <div class = "wind">
+						   </div>
+					   </div>
+					   <div class = "col-sm-3">
+		    			 <div class = "surfHeight">
+			    		 <h3>Surf Height: </h3>
+			    		 </div>
+						</div>
+						<div class = "col-sm-3">
+			    		  <div class = "rating">
+			    		  Rating: </div>
+						  	<div id = "poorFairGood">
+							</div>
+			 			  </div>
+			 		</div>
+				</div>
+	   		</div>
+	    </div>
+		</div>
+		<div class = "col-sm-3"></div>
+		<div class = "col-sm-3">
+			<canvas id="myChart" width="400px" height="400px" style = ""></canvas>
+		</div>
+		    <div class = "searchWrapper">
+			    <i class = "glyphicon glyphicon-search"></i> <input type = "text" id = "searchText" class = "ui-autocomplete">
+			    <button type = "button" id = "submitBtn">Submit</button>
+		    </div>
+		</div>
+		</div>
+	</div>
+    	<!-- <div class = "display">
+    		<div class = "ui-autocomplete">
+    			<label for = "tags">Tags: </label>
+    			<input id = "tags">
+    		</div>
+    	</div> -->
+
+    <!-- container used by FlexView API -->
+    <!-- <div class="oax-top-cont"></div> -->
+	<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
+	<script type = "text/javascript" src = "assets/javascript/surf.js"></script>
+
+  </body>
+
+</html>
