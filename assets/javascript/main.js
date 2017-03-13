@@ -54,8 +54,7 @@ function initMap() {
         });
     } else {
         //TODO: if unable to get current location then prompt user to enter one manually
-        prompt('Please input your location');
-        
+        prompt('Please input your location');  
     }
 }
 
@@ -112,26 +111,7 @@ function searchCallback(results, status) {
                 //need to update photos after calling getDetails with this place's id
                 photos: null
             };
-
-            console.log(places[i]);
-
-            //call getDetails using id for current place
-            var detailsRequest = {
-                placeId: place.place_id
-            };
-            //GET details (refer to detailsCallback function)
-            service.getDetails(detailsRequest, detailsCallback);
             
-            //places[i]={};
-
-            //TODO: figure out how to add the returned photos from the above getDetails() call to the current place's data.
-            //Not sure if this should be updated here or in the detailsCallback() function
-
-            //log the current place and then the global array of place objects
-            console.log("place: " + place);
-            console.log("places: " + places);
-            counter++;
-
             places.push(thisPlace);
 
             //log the current place and then the global array of place objects
