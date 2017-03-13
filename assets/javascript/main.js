@@ -9,30 +9,45 @@ var places = [];
 var currentPlace;
 var currentPhotos = [];
 
-//used to store current location
-var currentLot = {
-    lat: null,
-    lng: null
-};
+function getWeather(lat, lng){
+    var apikeyid = "eb3f27114445b4659aab2c8fd7a8fa5d";
+	var queryURL = "http://api.openweathermap.org/data/2.5/weather?"
+		+ "lat=" + lat 
+		+ "&lon=" + lng 
+		+ "&appid=" + apikeyid;
+	console.log(queryURL);
+	$.ajax({
+		url: queryURL,
+		method: 'GET' })
+		.done(function(response){
+			console.log(response);
+		});
+}
+
 /** Call this to get current location and store lat & lng in currentLot */
 function initMap() {
+   
     //if browser supports current location then store it in currentLot, else get from user input
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function (position) {
+        navigator.geolocation.getCurrentPosition(function (position) { 
             currentLot = {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude,
                 switch: true
             };
+           
             console.log("initMap Latitude: " + currentLot.lat + ". Longitude: " + currentLot.lng);
-            //once current location is loaded, initialize nearby places
-            if (currentLot.switch) {
+            //Check if the API has returned the user's current location. If so the if statement would run
+            if(currentLot.switch){
                 initializePlaces(currentLot.lat, currentLot.lng);
+                getWeather(currentLot.lat, currentLot.lng);
+
+
             }
-        }, function(){ prompt("please enter a location"); }, {timeout:10000});
+        }, function(){console.log("error"); }, {timeout:5000});
     } else {
         //TODO: if unable to get current location then prompt user to enter one manually
-        prompt('Please input your location');
+        prompt('Please input your location');  
     }
 }
 
@@ -102,6 +117,7 @@ function detailsCallback(place, status) {
         console.log(currentPlace);
     }
 }
+
 
 function getPhotos(currentPlace) {
     //GET details for the current place
