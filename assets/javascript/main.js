@@ -37,6 +37,7 @@ function getWeather(lat, lng){
 
 /** Call this to get current location and store lat & lng in currentLot */
 function initMap() {
+   
     //if browser supports current location then store it in currentLot, else get from user input
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) { 
@@ -45,16 +46,20 @@ function initMap() {
                 lng: position.coords.longitude,
                 switch: true
             };
+           
             console.log("initMap Latitude: " + currentLot.lat + ". Longitude: " + currentLot.lng);
             //Check if the API has returned the user's current location. If so the if statement would run
             if(currentLot.switch){
                 initializePlaces(currentLot.lat, currentLot.lng);
                 getWeather(currentLot.lat, currentLot.lng);
+
+
             }
         });
     } else {
         //TODO: if unable to get current location then prompt user to enter one manually
         prompt('Please input your location');  
+
     }
 }
 
