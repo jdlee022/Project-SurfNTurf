@@ -39,7 +39,7 @@ function initMap() {
                 initializePlaces(currentLot.lat, currentLot.lng);
                 
             }
-        });
+        }, function(){console.log("error")}, {timeout:5000});
     } else {
         //TODO: if unable to get current location then prompt user to enter one manually
         prompt('Please input your location');
