@@ -11,7 +11,7 @@ When you have working code that you are ready to push:
 <html lang="en">
 
 <head>
-    <title>Hike/Surf</title>
+    <title>Surf or Hike?</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
      
@@ -31,11 +31,12 @@ When you have working code that you are ready to push:
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
 
-<body>
+<body id="splashBody">
     <!--needed for google maps api?-->
     <div id="map" class="hidden"></div>
 
 
+<<<<<<< HEAD
 
 
     <!-- Full Page Image Background Carousel Header -->
@@ -77,6 +78,17 @@ When you have working code that you are ready to push:
 <div id="content-box">
     <button type="btn" id="newPlace">Next place</button>
     
+=======
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 title-container">
+            <h1 id="surf-title">SURF</h1>
+         </div>
+         <div class="col-md-6 title-container">
+              <h1 id="hike-title">HIKE</h1>
+         </div>
+    </div>
+>>>>>>> e2bb4d438e195512bd1f18201a5ef2d4cfbab101
 </div>
 
 
@@ -98,13 +110,8 @@ When you have working code that you are ready to push:
     <script src="assets/javascript/main.js" type="text/javascript"></script>
     <script src="assets/javascript/surf.js" type="text/javascript"></script>
     <script src="assets/javascript/hike.js" type="text/javascript"></script>
-
-    <!--activaqte carousel-->
-    <script>
-    $('.carousel').carousel({
-        interval: 5000 //changes the speed
-    })
-    </script>
+    <script src="assets/javascript/front-end.js" type="text/javascript"></script>
+  
 
 
 </body>
