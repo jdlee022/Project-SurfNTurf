@@ -66,6 +66,8 @@ var service;
 var infowindow;
 //global variable used to store list of places relevant to current location
 var places = [];
+var currentPlace;
+var currentPhotos = [];
 /** gets places based on given lat & lng */
 function initializePlaces(lat, lng) {
     //check if valid lat and lng were given
@@ -102,14 +104,14 @@ function searchCallback(results, status) {
             var place = results[i];
 
             //add a new place object to the places array
-            places.push({
+            var thisPlace = {
                 location: place.geometry.location,
                 placeId: place.place_id,
                 name: place.name,
                 url: place.url,
                 //need to update photos after calling getDetails with this place's id
                 photos: null
-            });
+            };
 
             console.log(places[i]);
 
@@ -129,17 +131,49 @@ function searchCallback(results, status) {
             console.log("place: " + place);
             console.log("places: " + places);
             counter++;
+
+            places.push(thisPlace);
+
+            //log the current place and then the global array of place objects
+            //console.log(place);
         }
     }
 }
 
 /** Get the photos from the details returned and update the photos attribute for the corresponding place object in the places[] array */
 function detailsCallback(place, status) {
+    //console.log(thisPlace);
     if (status == google.maps.places.PlacesServiceStatus.OK) {
-        //places[counter].photos = place.photos;
-        console.log("photos for " + place.name + ":");
-        console.log(place.photos);
+        //whenever the newPlace button is clicked 
+        //places[counter - 1].photos = place.photos;
+        places[counter - 1].url = place.url;
+        for (var i = 0; i < place.photos.length; i++) {
+            currentPhotos[i] = place.photos[i].getUrl({
+                'maxWidth': 4000,
+                'maxHeight': 4000
+            });
+        }
+        places[counter - 1].photos = currentPhotos;
+        currentPlace = places[counter - 1];
+        console.log("currentPlace:");
+        console.log(currentPlace);
     }
 }
 
 
+function getPhotos(currentPlace) {
+    //GET details for the current place
+    var detailsRequest = {
+        placeId: currentPlace.placeId
+    };
+    service.getDetails(detailsRequest, detailsCallback);
+}
+
+/** When the user clicks a button to load a new place update the array of current pictures */
+$("#newPlace").on("click", function () {
+    getPhotos(places[counter]);
+    counter++;
+});
+
+//initialize data based on current location when page loads
+initMap();
