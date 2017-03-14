@@ -114,27 +114,33 @@ h1 .infoBar{
 	position:absolute;
 	padding:0 10px 10px 10px;
 	border:solid 2px black;
-	left:50px;
+	left:20px;
 	top:225px;
 	margin:20px;
-	width:325px;
+	width:420px;
 }
 .spotName{
 	margin-top:0px;
 	border-bottom: solid 2px black;
-	font-size:250%
+	font-size:250%;
+	padding-bottom:10px;
+	text-align:center;
 }
 .detailsWrapper{
 	font-size:125%;
 	font-weight:bold;
+	text-align:center;
+}
+h2{
+	color:black;
 }
 .detailsWrapper .col-sm-3{
 	padding-right:5px;
 }
 .searchWrapper{
 	position:absolute;
-	bottom:225px;
-	right:35px;
+	top:240px;
+	right:-83px;
 	border:solid 2px black;
 	padding-bottom:20px;
 	width:325px;
@@ -149,7 +155,51 @@ button{
 	width:400px !important;
 	height:400px !important;
 	float:right;
-	right:0px;
-	top:0px;
-	
+	right:0px !important;
+	top:0px !important;
+}
+canvas{
+	right:100px;
+}
+#myChart.clicked{
+	margin-bottom:
+}
+.glyphicon.glyphicon-arrow-left{
+	font-size:175%;
+	margin:0;
+	padding:0;
+}
+.glyphicon.glyphicon-map-marker{
+	font-size:75%
+}
+.glyphicon-thumbs-up{
+	display:block;
+	font-size:200%;
+	float:left;
+	color:black;
+	margin-left:0;
+}
+.glyphicon-thumbs-down{
+	font-size:210%;
+	float:left;
+	color:black;
+	margin-left:5px;
+}
+.glyphicon.glyphicon-menu-down{
+	clear:both;
+	font-size:200%;
+	display:block;
+	text-align:center;
+	margin-top:5px
+}
+.glyphicon.glyphicon-menu-down.clicked{
+	-webkit-transform: rotate(180deg);
+	-webkit-transition: height 3s;
+	bottom:0;
+	position:absolute;
+	left: 90px;
+}
+.infoBar.clicked{
+	left:21px;
+	top: -33px;
 }
