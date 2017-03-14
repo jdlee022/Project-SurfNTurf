@@ -29,7 +29,6 @@ function getWeather(lat, lng) {
 function initMap() {
 
     //if browser supports current location then store it in currentLot, else get from user input
-<<<<<<< HEAD
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) { 
             currentLot = {
@@ -52,7 +51,6 @@ function initMap() {
         prompt('Please input your location');  
         initSearch();
     }
-=======
 
     navigator.geolocation.getCurrentPosition(function (position) {
         currentLot = {
@@ -73,7 +71,6 @@ function initMap() {
     }, {
         timeout: 5000
     });
->>>>>>> 80265a5772e9d0b157059b04723ee532ec8d0372
 }
 
 /** gets places based on given lat & lng */
@@ -160,9 +157,5 @@ $("#newPlace").on("click", function () {
 });
 
 //initialize data based on current location when page loads
-<<<<<<< HEAD
-initMap();
 
-=======
 initMap();
->>>>>>> 80265a5772e9d0b157059b04723ee532ec8d0372
