@@ -31,7 +31,7 @@ function likeCountFx(heartID){
         //take a snapshot of current data
         ref.once("value")
             .then(function(snapshot){
-                //Test if this place has info in db
+            //Test if this place has info in db
             if (snapshot.child(currentName).exists()){
                 //retrievve current like count 
                 likeCount = snapshot.child(currentName + "/likes").val();
@@ -63,3 +63,24 @@ function likeCountFx(heartID){
     });
 }
 
+
+//Store user's data in the storage:
+function saveFavLocal(){
+     $("#heart").on("click", function(){
+        //localStorage.setItem("");
+     });
+     
+}
+
+// function addUsertoArray(){
+//     $("#userName").on("click", function(){
+//         userName = $("input[name=userName]").val()
+//     });
+// }
+
+function loadUserFav() {
+    //when the user try to open the favorite list
+    $("button").on("click", function(){
+        
+    });
+}
