@@ -48,6 +48,7 @@ function initMap() {
     } else {
         //TODO: if unable to get current location then prompt user to enter one manually
         prompt('Please input your location');  
+        initSearch();
     }
 }
 
@@ -135,3 +136,4 @@ $("#newPlace").on("click", function () {
 
 //initialize data based on current location when page loads
 initMap();
+
