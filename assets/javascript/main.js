@@ -175,4 +175,5 @@ $("#newPlace").on("click", function () {
 });
 
 //initialize data based on current location when page loads
+
 initMap();
