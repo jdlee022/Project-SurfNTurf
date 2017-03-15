@@ -44,6 +44,12 @@ body {
 h3#spot-name {
     color: white;
     opacity: 1;
+    
+}
+
+div#icon-spot.row {
+    margin-left: 10px;
+    
 }
 
 div#content-box.container {
@@ -56,6 +62,7 @@ div#content-box.container {
   background-color: black;
   opacity: 0.7;
   box-shadow: 0 0 10px 5px black;
+  
   
 }
 
@@ -96,6 +103,28 @@ img.icon {
   
 }
 
-div.row {
-   display: inline; 
+img#location-icon {
+    max-height: 30px;
+    max-width: 30px;
+    padding-top: 5px;
+    margin-top: 10px;
+}
+
+
+
+div#name-spot {
+  
+}
+
+h3#temp-info {
+    margin-top: 10px;
+    margin-left: 10px;
+    color: grey;
+}
+
+h3#wind-info {
+    color: grey;
+    margin-top: 10px;
+    margin-left: -10px;
+
 }
