@@ -109,4 +109,31 @@ button#newPlace:hover {
   color: white;
   transition-duration: .5s; }
 
+div#favoritesWrapper {
+  position: fixed;
+  top: 25px;
+  left: 25px;
+  height: 230px;
+  width: 400px;
+  border-radius: 10px;
+  background-color: black;
+  opacity: 0.7;
+  box-shadow: 0 0 10px 5px black; }
+
+div.favoritesHeaderText {
+  margin-left: -30px; }
+
+i {
+  margin-top: 15px;
+  margin-left: 15px;
+  font-size: 250%; }
+
+i.glyphicon-heart:hover {
+  color: red;
+  transition-duration: .5s; }
+
+i.glyphicon-align-justify:hover {
+  color: white;
+  transition-duration: .5s; }
+
 /*# sourceMappingURL=style.css.map */
