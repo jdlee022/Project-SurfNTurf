@@ -1,3 +1,28 @@
+
+//CALL FUNCTION AND ON CLICK EVENTS
+
+var currentLot = {
+    lat: null,
+    lng: null,
+    switch : false
+};
+
+var searchLocation = {
+    lat: null,
+    lng: null,
+    switch : false
+};
+
+
+var surfSpot = {
+    name: null,
+    lat: null,
+    lng: null,
+    height: null, 
+    wind: null, 
+    weather: null
+};
+
 /**
  * @file - This file manages the api calls to get the hiking places and details
  * 
@@ -20,6 +45,7 @@
  * Use modals instead of prompt when can't get location.
  */
 
+
 // TEXT SEARCH request
 var map;
 var service;
@@ -31,6 +57,8 @@ var places = [];
 var currentPlace;
 var currentPhotos = [];
 var locationSearch = "";
+var temp;
+var wind;
 
 function getWeather(lat, lng, place) {
     var apikeyid = "eb3f27114445b4659aab2c8fd7a8fa5d";
@@ -43,8 +71,13 @@ function getWeather(lat, lng, place) {
             method: 'GET'
         })
         .done(function (response) {
-            place.temp = Math.floor(response.main.temp);
-            place.wind = Math.floor(response.wind.speed);
+            temp = Math.floor(response.main.temp).toString();
+            wind =  Math.floor(response.wind.speed).toString();
+            console.log(wind);
+            console.log(temp);
+            $("#temp-info").text(temp + "°");
+            $("#wind-info").text(wind + "°");
+            
         });
 }
 
@@ -158,6 +191,8 @@ function detailsCallback(place, status) {
         currentPlace = places[counter - 1];
         console.log("currentPlace:");
         console.log(currentPlace);
+        console.log(currentPlace.photos);
+        infoHike(currentPlace);
     }
 }
 
@@ -174,7 +209,6 @@ function getPhotos(currentPlace) {
 $("#newPlace").on("click", function () {
     getWeather(places[counter].lat, places[counter].lng, places[counter]);
     getPhotos(places[counter]);
-    
 
     counter = counter % (places.length - 1);
     counter++;
@@ -189,5 +223,15 @@ $("#modalSearch").on("click", function () {
     // getPhotos(places[counter]);
     //counter++;
 });
+
+//APPEND INFO in hike.html
+function infoHike(current){
+    $("#spot-name").html("<a id='current-spot' href='"+ current.url + "' target='_blank'>"+ current.name + "</a>");
+    console.log("<a href='"+ current.url + "'>"+ current.name + "</a>");
+    dispLikes();
+}
+
+
+//initialize data based on current location when page loads
 
 initMap();
