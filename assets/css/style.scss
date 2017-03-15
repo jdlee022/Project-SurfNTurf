@@ -56,7 +56,7 @@ div#content-box.container {
   position: fixed;
   bottom: 25px;
   left: 25px;
-  height: 200px;
+  height: 230px;
   width: 400px;
   border-radius: 10px;
   background-color: black;
@@ -126,5 +126,32 @@ h3#wind-info {
     color: grey;
     margin-top: 10px;
     margin-left: -10px;
+    margin-bottom: 20px;
 
+}
+
+h3#spot-name {
+    margin-left: 33%;
+    margin-right: 33%;
+    margin-bottom: 5%;
+}
+
+button#newPlace {
+    margin-left: 25%;
+    margin-right: 33%;
+    margin-bottom: 10px;
+    font-size: 20pt;
+    background-color: transparent;
+    border-color: transparent;
+    width: 200px;
+    color: grey;
+    font-weight: 600;
+    border-radius: 10px;
+box-shadow: 0px 0px 20px 0px rgba(255, 255, 255, 0.71);
+    
+}
+
+button#newPlace:hover {
+    color: white;
+    transition-duration: .5s;
 }
