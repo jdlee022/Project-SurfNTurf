@@ -55,6 +55,8 @@ var places = [];
 var currentPlace;
 var currentPhotos = [];
 var locationSearch = "";
+var temp;
+var wind;
 
 function getWeather(lat, lng, place) {
     var apikeyid = "eb3f27114445b4659aab2c8fd7a8fa5d";
@@ -67,8 +69,13 @@ function getWeather(lat, lng, place) {
             method: 'GET'
         })
         .done(function (response) {
-            place.temp = Math.floor(response.main.temp);
-            place.wind = Math.floor(response.wind.speed);
+            temp = Math.floor(response.main.temp).toString();
+            wind =  Math.floor(response.wind.speed).toString();
+            console.log(wind);
+            console.log(temp);
+            $("#temp-info").text(temp + "°");
+            $("#wind-info").text(wind + "°");
+            
         });
 }
 
@@ -179,6 +186,8 @@ function detailsCallback(place, status) {
         currentPlace = places[counter - 1];
         console.log("currentPlace:");
         console.log(currentPlace);
+        console.log(currentPlace.photos);
+        infoHike(currentPlace);
     }
 }
 
@@ -200,6 +209,12 @@ $("#newPlace").on("click", function () {
     counter++;
 });
 
-//initialize data based on current location when page loads
+//APPEND INFO in hike.html
+function infoHike(current){
+    $("#spot-name").html("<a href='"+ current.url + "' target='_blank'>"+ current.name + "</a>");
+    console.log("<a href='"+ current.url + "'>"+ current.name + "</a>");
+}
 
+
+//initialize data based on current location when page loads
 initMap();
