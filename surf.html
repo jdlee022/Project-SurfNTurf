@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+
 	<link rel = "stylesheet" type = "text/css" href = "assets/css/surf.css">
 	<script src = "https://momentjs.com/downloads/moment.js"></script>
 	<script src = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.js"></script>
@@ -12,6 +13,18 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="">
 	<link rel = "stylesheet" type = "text/css" href = "assets/css/surf.css">
 	<title>Surf</title>
+
+		<title> Surf App </title>
+  <link rel = "stylesheet" type = "text/css" href = "assets/css/surf.css">
+  <script src = "https://momentjs.com/downloads/moment.js"></script>
+  <script src = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.js"></script>
+  <script src = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
+  <link rel="stylesheet" href="assets/css/jquery-ui.theme.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="assets/javascript/jquery-ui.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="">
+  <link rel = "stylesheet" type = "text/css" href = "assets/css/jquery-ui.css">
+
 	</head>
 
   <body>
@@ -38,16 +51,23 @@
 	<div class = "row">
     	<div class = "display"> 
 	    <div class = "col-sm-3">
+			<div class = "searchWrapper">
+			    <i class = "glyphicon glyphicon-search"></i> <input type = "text" id = "searchText" class = "ui-autocomplete">
+			    <button type = "button" id = "submitBtn">Submit</button>
+		    </div>
 	   		<div class = "infoBar">
 		    	<div class = "spotName">
 		    	</div>			
 				<div class = "row">
 					<div class = "detailsWrapper">
 					   <div class = "col-sm-3">
-						   <div class = "waterTemp"></div>
+						   <div class = "waterTemp">
+							   <img src = "http://icongal.com/gallery/image/6062/water_temperature_temperature.png" height = "40px" width = "40px">
+							</div>
 					   </div>
 					   <div class = "col-sm-3">
 						   <div class = "wind">
+							   <img src = "https://image.flaticon.com/icons/svg/56/56086.svg" height = "50px" width = "50px">
 						   </div>
 					   </div>
 					   <div class = "col-sm-3">
@@ -57,23 +77,21 @@
 						</div>
 						<div class = "col-sm-3">
 			    		  <div class = "rating">
-			    		  Rating: </div>
+			    		  </div>
 						  	<div id = "poorFairGood">
 							</div>
 			 			  </div>
 			 		</div>
 				</div>
+				<canvas id="myChart" width="400px" height="400px" style = ""></canvas>
+
+				<i class = "glyphicon glyphicon-menu-down"> </i>
 	   		</div>
 	    </div>
 		</div>
 		<div class = "col-sm-3"></div>
 		<div class = "col-sm-3">
-			<canvas id="myChart" width="400px" height="400px" style = ""></canvas>
 		</div>
-		    <div class = "searchWrapper">
-			    <i class = "glyphicon glyphicon-search"></i> <input type = "text" id = "searchText" class = "ui-autocomplete">
-			    <button type = "button" id = "submitBtn">Submit</button>
-		    </div>
 		</div>
 		</div>
 	</div>
