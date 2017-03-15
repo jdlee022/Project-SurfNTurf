@@ -91,6 +91,7 @@ function saveFavLocal(){
      $("#heart").on("click", function(){
         placeName = $("#current-spot").html();
         url = currentPlace.url;
+        console.log(url);
         //retrieve favorteArray from localStorage:
         if (localStorage.getItem("Favorite(s)")){
             var favoriteArray = localStorage.getItem("Favorite(s)");
@@ -100,9 +101,9 @@ function saveFavLocal(){
             url: currentPlace.url
         };
         //if there is no favorite array, then create one:
-        if ( typeof(favoriteArray) == "undefined" ){
+        if ( favoriteArray == "[null]" | favoriteArray == undefined ){
             var favoriteArray =[];
-            pushNsaveFav(favoriteArray);
+            pushNsaveFav(favoriteArray, placeObj);
         //there exists favoriteArray as string
         //if there is already a fav array:
         } else {
@@ -151,6 +152,7 @@ function loadUserFav(list) {
         for (var i= 0; i < favList.length; i++){
             place = favList[i];
             console.log(place);
+            console.log(place.url);
             var newDiv = $("<div><a target='_blank' href='" + place.url + "'>"+ place.name + "</a></div>");
             $("#favoritesContentArea").append(newDiv);
         };

@@ -73,6 +73,8 @@ function getWeather(lat, lng, place) {
         .done(function (response) {
             temp = Math.floor(response.main.temp).toString();
             wind =  Math.floor(response.wind.speed).toString();
+            place.temp = Math.floor(response.main.temp);
+            place.wind = Math.floor(response.main.wind);
             console.log(wind);
             console.log(temp);
             $("#temp-info").text(temp + "°");
