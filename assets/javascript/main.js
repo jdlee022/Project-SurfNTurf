@@ -16,6 +16,8 @@
  * This is due to the fact that it takes the browser an average of 3 seconds to get the user's
  * location after they click "Allow". So we need to figure out how to show some sort of loading screen
  * while this happens and then load the first place returned by their location.
+ * 
+ * Use modals instead of prompt when can't get location.
  */
 
 // TEXT SEARCH request
@@ -64,8 +66,9 @@ function initMap() {
         }
     }, function () {
         //if geolocation doesnt work then prompt user to enter a location
-        locationSearch = prompt("Cannot get your current location! Please enter a location (eg. 'La Jolla')");
-        initializePlaces(0.0, 0.0);
+        $('#myModal').modal('show');
+        //locationSearch = prompt("Cannot get your current location! Please enter a location (eg. 'La Jolla')");
+
     }, {
         timeout: 5000
     });
@@ -73,12 +76,12 @@ function initMap() {
 
 /** gets places based on given lat & lng */
 function initializePlaces(lat, lng) {
-    var pyrmont = new google.maps.LatLng(33.39061299257676, -117.5987721491924);
+    var pyrmont = new google.maps.LatLng(lat, lng);
     map = new google.maps.Map(document.getElementById('map'), {
         center: pyrmont,
         zoom: 15
     });
-    
+
     //want to search for hiking locations
     var myQuery = 'hiking';
     //if we searched for a location then add it to search
@@ -88,7 +91,7 @@ function initializePlaces(lat, lng) {
     //set data that determines what is returned
     var textRequest = {
         location: pyrmont,
-        radius: '500',
+        radius: '10000',
         query: myQuery
     };
     service = new google.maps.places.PlacesService(map);
@@ -114,7 +117,8 @@ function searchCallback(results, status) {
                 temp: null,
                 wind: null,
                 //need to update photos after calling getDetails with this place's id
-                photos: null
+                photos: null,
+                rating: null
             };
             places.push(thisPlace);
 
@@ -150,6 +154,7 @@ function detailsCallback(place, status) {
 
         //set currentPlace after all info has been added
         places[counter - 1].photos = currentPhotos;
+        places[counter - 1].rating = place.rating;
         currentPlace = places[counter - 1];
         console.log("currentPlace:");
         console.log(currentPlace);
@@ -169,11 +174,20 @@ function getPhotos(currentPlace) {
 $("#newPlace").on("click", function () {
     getWeather(places[counter].lat, places[counter].lng, places[counter]);
     getPhotos(places[counter]);
+    
 
     counter = counter % (places.length - 1);
     counter++;
 });
 
-//initialize data based on current location when page loads
+$("#modalSearch").on("click", function () {
+    locationSearch = $("#modalInput").val();
+    $("#modalInput").html("");
+    $('#myModal').modal('hide');
+    initializePlaces(0.0, 0.0);
+    // getWeather(places[counter].lat, places[counter].lng, places[counter]);
+    // getPhotos(places[counter]);
+    //counter++;
+});
 
 initMap();

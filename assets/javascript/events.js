@@ -22,7 +22,6 @@ var surfSpot = {
     weather: null
 };
 //call initMap()
-initMap();
     
    
     
