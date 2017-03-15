@@ -14,7 +14,7 @@ var database = firebase.database();
 var likeCount = null;
 
 //When the heart is click on, i++ like counts:
-likeCountFx("#heart");
+//likeCountFx("#heart");
 
 function likeCountFx(heartID){
     $(heartID).on('click', function(){
@@ -65,13 +65,27 @@ function likeCountFx(heartID){
 
 
 //Store user's data in the storage:
+var favoriteArray =[]
 function saveFavLocal(){
      $("#heart").on("click", function(){
-        //localStorage.setItem("");
+        //placeName = $("#currentPlace").html();
+        //url = currentPlace.url;
+        placeName ="Canyon";
+        url ="http";
+        placeObj = {
+            name: placeName,
+            url: url
+        };
+        favoriteArray.push(placeObj);
+        localStorage.setItem("favorite", favoriteArray);
+        //localStorage.setItem("favorite", placeName);
+        //localStorage.setItem("url")
+        //"name": placeName
+        //"url": currentPlace.url
      });
      
 }
-
+saveFavLocal();
 // function addUsertoArray(){
 //     $("#userName").on("click", function(){
 //         userName = $("input[name=userName]").val()
@@ -80,7 +94,8 @@ function saveFavLocal(){
 
 function loadUserFav() {
     //when the user try to open the favorite list
-    $("button").on("click", function(){
-        
+    $("#heart").on("click", function(){
+        var favList = localStorage.getItem(favorite);
+        console.log(favList);
     });
 }

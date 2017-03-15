@@ -1,74 +1,98 @@
+/**
+ * @file - This file manages the api calls to get the hiking places and details
+ * 
+ * In order to access the information needed for the current display you can 
+ * reference the global variable currentPlace and access it's properties:
+ * name, lat, lng, temp, wind, url, photos
+ * 
+ * Each time a button with the "#newPlace" id is clicked the currentPlace object will update.
+ * If the user continues to click newPlace and we run out of new places the currentPlace will 
+ * cycle and repeat.
+ * 
+ * TODO:
+ * As of now the currentPlace is empty when the page initially loads, it doesn't update until
+ * the newPlace button is pressed.
+ * 
+ * This is due to the fact that it takes the browser an average of 3 seconds to get the user's
+ * location after they click "Allow". So we need to figure out how to show some sort of loading screen
+ * while this happens and then load the first place returned by their location.
+ */
+
 // TEXT SEARCH request
-var counter = 0;
 var map;
 var service;
 var infowindow;
 //global variable used to store list of places relevant to current location
+var counter = 0;
 var search;
 var places = [];
 var currentPlace;
 var currentPhotos = [];
+var locationSearch = "";
 
-function getWeather(lat, lng){
+function getWeather(lat, lng, place) {
     var apikeyid = "eb3f27114445b4659aab2c8fd7a8fa5d";
-	var queryURL = "http://api.openweathermap.org/data/2.5/weather?"
-		+ "lat=" + lat 
-		+ "&lon=" + lng 
-		+ "&appid=" + apikeyid;
-	console.log(queryURL);
-	$.ajax({
-		url: queryURL,
-		method: 'GET' })
-		.done(function(response){
-			console.log(response);
-		});
+    var queryURL = "http://api.openweathermap.org/data/2.5/weather?mode=json&units=imperial&" +
+        "lat=" + lat +
+        "&lon=" + lng +
+        "&appid=" + apikeyid;
+    $.ajax({
+            url: queryURL,
+            method: 'GET'
+        })
+        .done(function (response) {
+            place.temp = Math.floor(response.main.temp);
+            place.wind = Math.floor(response.wind.speed);
+        });
 }
 
 /** Call this to get current location and store lat & lng in currentLot */
 function initMap() {
-   
     //if browser supports current location then store it in currentLot, else get from user input
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function (position) { 
-            currentLot = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude,
-                switch: true
-            };
-           
-            console.log("initMap Latitude: " + currentLot.lat + ". Longitude: " + currentLot.lng);
-            //Check if the API has returned the user's current location. If so the if statement would run
-            if(currentLot.switch){
-                initializePlaces(currentLot.lat, currentLot.lng);
-                getWeather(currentLot.lat, currentLot.lng);
+    navigator.geolocation.getCurrentPosition(function (position) {
+        locationSearch = "";
+        currentLot = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+            switch: true
+        };
 
-
-            }
-        }, function(){console.log("error"); }, {timeout:5000});
-    } else {
-        //TODO: if unable to get current location then prompt user to enter one manually
-        prompt('Please input your location');  
-    }
+        console.log("Got current place!");
+        //Check if the API has returned the user's current location. If so the if statement would run
+        if (currentLot.switch) {
+            initializePlaces(currentLot.lat, currentLot.lng);
+        }
+    }, function () {
+        //if geolocation doesnt work then prompt user to enter a location
+        locationSearch = prompt("Cannot get your current location! Please enter a location (eg. 'La Jolla')");
+        initializePlaces(0.0, 0.0);
+    }, {
+        timeout: 5000
+    });
 }
 
 /** gets places based on given lat & lng */
 function initializePlaces(lat, lng) {
-        var pyrmont = new google.maps.LatLng(lat, lng);
-
-        map = new google.maps.Map(document.getElementById('map'), {
-            center: pyrmont,
-            zoom: 15
-        });
-        //set data that determines what is returned
-        var textRequest = {
-            location: pyrmont,
-            radius: '500',
-            query: 'hiking'
-        };
-
-        service = new google.maps.places.PlacesService(map);
-        //GET the data (see searchCallBack function)
-        service.textSearch(textRequest, searchCallback);
+    var pyrmont = new google.maps.LatLng(33.39061299257676, -117.5987721491924);
+    map = new google.maps.Map(document.getElementById('map'), {
+        center: pyrmont,
+        zoom: 15
+    });
+    
+    //want to search for hiking locations
+    var myQuery = 'hiking';
+    //if we searched for a location then add it to search
+    if (locationSearch.length > 1) {
+        myQuery = myQuery + ' in ' + locationSearch;
+    }
+    //set data that determines what is returned
+    var textRequest = {
+        location: pyrmont,
+        radius: '500',
+        query: myQuery
+    };
+    service = new google.maps.places.PlacesService(map);
+    service.textSearch(textRequest, searchCallback);
 }
 
 /** Handles the data that is returned by google places */
@@ -76,17 +100,19 @@ function searchCallback(results, status) {
     //empty places array when new location is searched
     places = [];
     if (status == google.maps.places.PlacesServiceStatus.OK) {
-        //DO STUFF IN HERE TO ACCESS EACH PLACE
         for (var i = 0; i < results.length; i++) {
             //get the ith place object
             var place = results[i];
 
             //add a new place object to the places array
             var thisPlace = {
-                location: place.geometry.location,
+                lat: place.geometry.location.lat(),
+                lng: place.geometry.location.lng(),
                 placeId: place.place_id,
                 name: place.name,
                 url: place.url,
+                temp: null,
+                wind: null,
                 //need to update photos after calling getDetails with this place's id
                 photos: null
             };
@@ -100,17 +126,29 @@ function searchCallback(results, status) {
 
 /** Get the photos from the details returned and update the photos attribute for the corresponding place object in the places[] array */
 function detailsCallback(place, status) {
-    //console.log(thisPlace);
     if (status == google.maps.places.PlacesServiceStatus.OK) {
-        //whenever the newPlace button is clicked 
-        //places[counter - 1].photos = place.photos;
-        places[counter - 1].url = place.url;
-        for (var i = 0; i < place.photos.length; i++) {
-            currentPhotos[i] = place.photos[i].getUrl({
-                'maxWidth': 4000,
-                'maxHeight': 4000
-            });
+        //reset the currentPhotos
+        currentPhotos = [];
+        //if details api gives us a url then assign it to the place, else set default url to google maps
+        if (typeof (place.url) !== undefined) {
+            places[counter - 1].url = place.url;
+        } else {
+            places[counter - 1].url = "https://www.google.com/maps/";
         }
+
+        //if details api gives us photos then assign it to the place, else give it a default image
+        if (place.photos !== undefined) {
+            for (var i = 0; i < place.photos.length; i++) {
+                currentPhotos[i] = place.photos[i].getUrl({
+                    'maxWidth': 4000,
+                    'maxHeight': 4000
+                });
+            }
+        } else {
+            currentPhotos[0] = "https://lh4.googleusercontent.com/-IhuqmUwfUNE/V5q2XH0F37I/AAAAAAAAEtw/r5A0UzbkuO0-wCoko9BL5-DpByXBzzO0wCJkC/w4000-h4000-k/";
+        }
+
+        //set currentPlace after all info has been added
         places[counter - 1].photos = currentPhotos;
         currentPlace = places[counter - 1];
         console.log("currentPlace:");
@@ -118,7 +156,7 @@ function detailsCallback(place, status) {
     }
 }
 
-
+/** Gets the photos for the given place */
 function getPhotos(currentPlace) {
     //GET details for the current place
     var detailsRequest = {
@@ -129,9 +167,13 @@ function getPhotos(currentPlace) {
 
 /** When the user clicks a button to load a new place update the array of current pictures */
 $("#newPlace").on("click", function () {
+    getWeather(places[counter].lat, places[counter].lng, places[counter]);
     getPhotos(places[counter]);
+
+    counter = counter % (places.length - 1);
     counter++;
 });
 
 //initialize data based on current location when page loads
+
 initMap();
