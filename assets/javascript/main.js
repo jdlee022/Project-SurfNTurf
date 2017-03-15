@@ -204,15 +204,15 @@ function getPhotos(currentPlace) {
 $("#newPlace").on("click", function () {
     getWeather(places[counter].lat, places[counter].lng, places[counter]);
     getPhotos(places[counter]);
-
     counter = counter % (places.length - 1);
     counter++;
 });
 
 //APPEND INFO in hike.html
 function infoHike(current){
-    $("#spot-name").html("<a href='"+ current.url + "' target='_blank'>"+ current.name + "</a>");
+    $("#spot-name").html("<a id='current-spot' href='"+ current.url + "' target='_blank'>"+ current.name + "</a>");
     console.log("<a href='"+ current.url + "'>"+ current.name + "</a>");
+    dispLikes();
 }
 
 

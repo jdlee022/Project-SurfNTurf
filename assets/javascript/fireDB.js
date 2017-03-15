@@ -1,10 +1,11 @@
 //Configuration and initialize DB
+
 var config = {
-    apiKey: "AIzaSyABAurtLfnJD7fa63YfFAXgrM3wl2u7A84",
-    authDomain: "project-surfnturf.firebaseapp.com",
-    databaseURL: "https://project-surfnturf.firebaseio.com",
-    storageBucket: "project-surfnturf.appspot.com",
-    messagingSenderId: "948418625999"
+apiKey: "AIzaSyABAurtLfnJD7fa63YfFAXgrM3wl2u7A84",
+authDomain: "project-surfnturf.firebaseapp.com",
+databaseURL: "https://project-surfnturf.firebaseio.com",
+storageBucket: "project-surfnturf.appspot.com",
+messagingSenderId: "948418625999"
 };
 firebase.initializeApp(config);
 var database = firebase.database();
@@ -16,17 +17,15 @@ var likeCount = null;
 //When the heart is click on, i++ like counts:
 
 //TODO: Make sure to call the function below:
-//likeCountFx("#heart");
+likeCountFx("#heart");
 
 function likeCountFx(heartID){
     $(heartID).on('click', function(){
-        //get the current spot's name        
-        currentName = $("#currentSpot").html();
-        //test for one that not yet exists in the db
-        //currentName = "New Canyon";
-        //test for one that already exists in the db
-        //currentName = "Old Mountain";
-        currentName = currentName.replace(" ", "_");
+        //get the current spot's nam        
+        currentName = $("#current-spot").html();
+        if (currentName !== ""){
+            currentName = currentName.replace(" ", "_");
+        }
         //check if database has a path for this aready
 
         var ref = database.ref("spotsInfo/hike");
@@ -51,47 +50,69 @@ function likeCountFx(heartID){
                     lng: spotLng,
                     likes: likeCount
                 });
+                $("#heartCount").text(likeCount);
             //if the database doesn't have that path:
             } else {
                 //create new path to that place id and like starts at 1
+                likeCount=1;
                 database.ref("spotsInfo/hike/"+ currentName).set({
                     "id" : currentName, 
                     "lat": 0,
                     "lng": 0,
-                    "likes": 1   
-                }); //database.ref
+                    "likes": likeCount   
+                }); 
+                $("#heartCount").text(likeCount);
+                //database.ref
             }//else
         }) //function
     });
 }
 
+//Display current like of a placeName
+function dispLikes(){
+    currentName = $("#current-spot").html();
+    if (currentName !== ""){
+        currentName = currentName.replace(" ", "_");
+        var ref = database.ref("spotsInfo/hike");
+        ref.once("value")
+            .then(function(snapshot){
+            if (snapshot.child(currentName).exists()){
+                likeCount = snapshot.child(currentName + "/likes").val();
+                $("#heartCount").text(likeCount);
+            } else {
+                $("#heartCount").text("0");
+            }   
+        });    
+    }
+}
 
 //Store user's data in the storage:
 var favoriteList;
 saveFavLocal();
 function saveFavLocal(){
      $("#heart").on("click", function(){
-        //placeName = $("#currentPlace").html();
-        //TODO: Get the Url from Jon
-        //url = currentPlace.url;
+        placeName = $("#current-spot").html();
+        url = currentPlace.url;
         //retrieve favorteArray from localStorage:
         if (localStorage.getItem("Favorite(s)")){
             var favoriteArray = localStorage.getItem("Favorite(s)");
         }
-        placeName ="Canyon";
-        url ="http";
         placeObj = {
             name: placeName,
             url: currentPlace.url
         };
+        //if there is no favorite array, then create one:
         if ( typeof(favoriteArray) == "undefined" ){
             var favoriteArray =[];
             pushNsaveFav(favoriteArray);
         //there exists favoriteArray as string
+        //if there is already a fav array:
         } else {
+            //function check if user has already like this spot:
+            
+            checkFavList(favoriteArray, placeName);
             //turn it into json object format
-            favoriteArray = JSON.parse(favoriteArray);
-            pushNsaveFav(favoriteArray);  
+            
         }
      });    
 }
@@ -104,21 +125,41 @@ function pushNsaveFav(array){
     localStorage.setItem("Favorite(s)", array);
 }
 
+function checkFavList(list, name){
+    //if the name already in there: 
+    list = JSON.parse(list);
+    for (i = 0; i >= 0; i++){
+        favPlace = list[i];
+        if (favPlace.name === name){
+            break;
+        } else {
+            pushNsaveFav(list);  
+        }
+    }
+        
+}
+
 //TODO: Show user favorite
 //Create a button for the hamberger
 loadUserFav("Favorite(s)");
+$("#favList").on("click", function(){
+    loadUserFav("Favorite(s)")
+});
+    
 function loadUserFav(list) {
     //when the user try to open the favorite list
-    $("#favList").on("click", function(){
-        var favList = localStorage.getItem(list);
+    var favList = localStorage.getItem(list);
+    if (favList !== null){
+        favList = JSON.parse(favList);
         console.log(favList);
+        $("#favoritesContentArea").text("");
         for (var i= 0; i < favList.length; i++){
             place = favList[i];
             console.log(place);
-            var newDiv = $("<div>"+ place.name + "</div>");
-            $("#listDisp").append(newDiv);
+            var newDiv = $("<div><a target='_blank' href='" + place.url + "'>"+ place.name + "</a></div>");
+            $("#favoritesContentArea").append(newDiv);
         };
-    });
+    }
 }
 
 //check or create new user using user name: 
