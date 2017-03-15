@@ -14,6 +14,8 @@ var database = firebase.database();
 var likeCount = null;
 
 //When the heart is click on, i++ like counts:
+
+//TODO: Make sure to call the function below:
 //likeCountFx("#heart");
 
 function likeCountFx(heartID){
@@ -37,7 +39,7 @@ function likeCountFx(heartID){
                 likeCount = snapshot.child(currentName + "/likes").val();
                 spotID = snapshot.child(currentName + "/id").val();
                 spotLng = snapshot.child(currentName + "/lng").val() 
-                spotLat =snapshot.child(currentName + "/lat").val()
+                spotLat = snapshot.child(currentName + "/lat").val()
                 console.log(likeCount);
                 //add one more like to current one:
                 likeCount++;
@@ -65,37 +67,80 @@ function likeCountFx(heartID){
 
 
 //Store user's data in the storage:
-var favoriteArray =[]
+var favoriteList;
+saveFavLocal();
 function saveFavLocal(){
      $("#heart").on("click", function(){
         //placeName = $("#currentPlace").html();
+        //TODO: Get the Url from Jon
         //url = currentPlace.url;
+        //retrieve favorteArray from localStorage:
+        if (localStorage.getItem("Favorite(s)")){
+            var favoriteArray = localStorage.getItem("Favorite(s)");
+        }
         placeName ="Canyon";
         url ="http";
         placeObj = {
             name: placeName,
             url: url
         };
-        favoriteArray.push(placeObj);
-        localStorage.setItem("favorite", favoriteArray);
-        //localStorage.setItem("favorite", placeName);
-        //localStorage.setItem("url")
-        //"name": placeName
-        //"url": currentPlace.url
-     });
-     
+        if ( typeof(favoriteArray) == "undefined" ){
+            var favoriteArray =[];
+            pushNsaveFav(favoriteArray);
+        //there exists favoriteArray as string
+        } else {
+            //turn it into json object format
+            favoriteArray = JSON.parse(favoriteArray);
+            pushNsaveFav(favoriteArray);  
+        }
+     });    
 }
-saveFavLocal();
-// function addUsertoArray(){
-//     $("#userName").on("click", function(){
-//         userName = $("input[name=userName]").val()
-//     });
-// }
 
-function loadUserFav() {
+function pushNsaveFav(array){
+    array.push(placeObj);
+    //save favoriteArray in favoriteList (global)
+    favoriteList = array;
+    array = JSON.stringify(array);
+    localStorage.setItem("Favorite(s)", array);
+}
+
+//TODO: Show user favorite
+//Create a button for the hamberger
+loadUserFav("Favorite(s)");
+function loadUserFav(list) {
     //when the user try to open the favorite list
-    $("#heart").on("click", function(){
-        var favList = localStorage.getItem(favorite);
+    $("#favList").on("click", function(){
+        var favList = localStorage.getItem(list);
         console.log(favList);
+        for (var i= 0; i < favList.length; i++){
+            place = favList[i];
+            console.log(place);
+            var newDiv = $("<div>"+ place.name + "</div>");
+            $("#listDisp").append(newDiv);
+        };
     });
 }
+
+//check or create new user using user name: 
+//TODO: 
+$("#signin").on("click", function(){
+    userName = $("input[name=userName").val();
+    //check if userName has space:
+    //check if this user name is already in the firebase:
+    var ref = database.ref("userName/");
+        //take a snapshot of current data
+    ref.once("value")
+        .then(function(snapshot){
+        //Test if this place has info in db
+        if (snapshot.child(userName).exists()){
+            id = snapshot.child(userName + "/id").val();
+            favList = snapshot.child(userName + "/favList").val();
+        } else {
+            database.ref("userName/" + userName).set({
+                "id": userName,
+                //store favList as arrray or objects
+                "favList" : favoriteArray
+            });
+        }   
+    });
+});
