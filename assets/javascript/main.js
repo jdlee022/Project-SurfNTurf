@@ -73,10 +73,9 @@ function getWeather(lat, lng, place) {
         .done(function (response) {
             temp = Math.floor(response.main.temp).toString();
             wind =  Math.floor(response.wind.speed).toString();
-            console.log(wind);
-            console.log(temp);
+            console.log(response);
             $("#temp-info").text(temp + "°");
-            $("#wind-info").text(wind + "°");
+            $("#wind-info").text(wind + "mph");
             
         });
 }
@@ -151,7 +150,8 @@ function searchCallback(results, status) {
                 wind: null,
                 //need to update photos after calling getDetails with this place's id
                 photos: null,
-                rating: null
+                rating: null,
+                weather: null
             };
             places.push(thisPlace);
 
@@ -188,6 +188,7 @@ function detailsCallback(place, status) {
         //set currentPlace after all info has been added
         places[counter - 1].photos = currentPhotos;
         places[counter - 1].rating = place.rating;
+        places[counter - 1].temp
         currentPlace = places[counter - 1];
         console.log("currentPlace:");
         console.log(currentPlace);
@@ -233,5 +234,4 @@ function infoHike(current){
 
 
 //initialize data based on current location when page loads
-
 initMap();
