@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 //CALL FUNCTION AND ON CLICK EVENTS
 
 var currentLot = {
@@ -22,7 +22,7 @@ var surfSpot = {
     wind: null, 
     weather: null
 };
-=======
+
 /**
  * @file - This file manages the api calls to get the hiking places and details
  * 
@@ -42,7 +42,7 @@ var surfSpot = {
  * location after they click "Allow". So we need to figure out how to show some sort of loading screen
  * while this happens and then load the first place returned by their location.
  */
->>>>>>> 611852b19cb96ec859672d433d9141d16554eb52
+
 
 // TEXT SEARCH request
 var map;
