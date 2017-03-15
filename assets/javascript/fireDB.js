@@ -15,8 +15,6 @@ var database = firebase.database();
 var likeCount = null;
 
 //When the heart is click on, i++ like counts:
-
-//TODO: Make sure to call the function below:
 likeCountFx("#heart");
 
 function likeCountFx(heartID){
@@ -137,7 +135,6 @@ function checkFavList(list, name, obj){
     }
 }
 
-//TODO: Show user favorite
 //Create a button for the hamberger
 loadUserFav("Favorite(s)");
 $("#favList").on("click", function(){
@@ -160,8 +157,12 @@ function loadUserFav(list) {
     }
 }
 
+//TODO: save in local storage value of like switch
+
+
+
+
 // //check or create new user using user name: 
-// //TODO: 
 // $("#signin").on("click", function(){
 //     userName = $("input[name=userName").val();
 //     //check if userName has space:
