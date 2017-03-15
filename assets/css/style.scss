@@ -41,11 +41,12 @@ body {
     -o-background-size: cover;
 }
 
-footer {
-    margin: 50px 0;
+h3#spot-name {
+    color: white;
+    opacity: 1;
 }
 
-div#content-box {
+div#content-box.container {
   position: fixed;
   bottom: 25px;
   left: 25px;
@@ -53,8 +54,9 @@ div#content-box {
   width: 400px;
   border-radius: 10px;
   background-color: black;
-  opacity: 0.75;
+  opacity: 0.7;
   box-shadow: 0 0 10px 5px black;
+  
 }
 
 body#splashBody {
@@ -80,7 +82,20 @@ font-weight: 800;
 
 }
 
+ 
+
 div.title-container {
 margin-top: 350px;
 
+}
+
+img.icon {
+   max-height: 50px;
+   max-width: 50px;
+   opacity: 1;
+  
+}
+
+div.row {
+   display: inline; 
 }
