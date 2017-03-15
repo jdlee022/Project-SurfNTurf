@@ -21,7 +21,7 @@ likeCountFx("#heart");
 
 function likeCountFx(heartID){
     $(heartID).on('click', function(){
-        //get the current spot's nam        
+        //get the current spot's name        
         currentName = $("#current-spot").html();
         if (currentName !== ""){
             currentName = currentName.replace(" ", "_");
@@ -109,50 +109,48 @@ function saveFavLocal(){
         //if there is already a fav array:
         } else {
             //function check if user has already like this spot:
-            
-            checkFavList(favoriteArray, placeName);
-            //turn it into json object format
-            
+            checkFavList(favoriteArray,placeName, placeObj);
         }
+        loadUserFav("Favorite(s)");
      });    
 }
 
-function pushNsaveFav(array){
-    array.push(placeObj);
-    //save favoriteArray in favoriteList (global)
-    favoriteList = array;
+function pushNsaveFav(array, obj){
+    array.push(obj);
     array = JSON.stringify(array);
     localStorage.setItem("Favorite(s)", array);
 }
 
-function checkFavList(list, name){
+function checkFavList(list, name, obj){
     //if the name already in there: 
     list = JSON.parse(list);
-    for (i = 0; i >= 0; i++){
+    for (i = 0; i <= list.length; i++){
         favPlace = list[i];
-        if (favPlace.name === name){
-            break;
-        } else {
-            pushNsaveFav(list);  
+        console.log(i);
+        console.log(favPlace);
+        if ((favPlace !== undefined) && (favPlace.name === name)){
+            var placeExists = true; 
         }
+    };
+    if (placeExists != true ){     
+        pushNsaveFav(list, obj);  
     }
-        
 }
 
 //TODO: Show user favorite
 //Create a button for the hamberger
 loadUserFav("Favorite(s)");
 $("#favList").on("click", function(){
-    loadUserFav("Favorite(s)")
+    loadUserFav("Favorite(s)");
 });
     
 function loadUserFav(list) {
     //when the user try to open the favorite list
+    $("#favoritesContentArea").text("");
     var favList = localStorage.getItem(list);
     if (favList !== null){
         favList = JSON.parse(favList);
         console.log(favList);
-        $("#favoritesContentArea").text("");
         for (var i= 0; i < favList.length; i++){
             place = favList[i];
             console.log(place);
@@ -162,26 +160,26 @@ function loadUserFav(list) {
     }
 }
 
-//check or create new user using user name: 
-//TODO: 
-$("#signin").on("click", function(){
-    userName = $("input[name=userName").val();
-    //check if userName has space:
-    //check if this user name is already in the firebase:
-    var ref = database.ref("userName/");
-        //take a snapshot of current data
-    ref.once("value")
-        .then(function(snapshot){
-        //Test if this place has info in db
-        if (snapshot.child(userName).exists()){
-            id = snapshot.child(userName + "/id").val();
-            favList = snapshot.child(userName + "/favList").val();
-        } else {
-            database.ref("userName/" + userName).set({
-                "id": userName,
-                //store favList as arrray or objects
-                "favList" : favoriteList
-            });
-        }   
-    });
-});
+// //check or create new user using user name: 
+// //TODO: 
+// $("#signin").on("click", function(){
+//     userName = $("input[name=userName").val();
+//     //check if userName has space:
+//     //check if this user name is already in the firebase:
+//     var ref = database.ref("userName/");
+//         //take a snapshot of current data
+//     ref.once("value")
+//         .then(function(snapshot){
+//         //Test if this place has info in db
+//         if (snapshot.child(userName).exists()){
+//             id = snapshot.child(userName + "/id").val();
+//             favList = snapshot.child(userName + "/favList").val();
+//         } else {
+//             database.ref("userName/" + userName).set({
+//                 "id": userName,
+//                 //store favList as arrray or objects
+//                 "favList" : favoriteList
+//             });
+//         }   
+//     });
+// });
