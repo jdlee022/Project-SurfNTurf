@@ -33,6 +33,9 @@ h3#spot-name {
   color: white;
   opacity: 1; }
 
+div#icon-spot.row {
+  margin-left: 10px; }
+
 div#content-box.container {
   position: fixed;
   bottom: 25px;
@@ -67,7 +70,20 @@ img.icon {
   max-width: 50px;
   opacity: 1; }
 
-div.row {
-  display: inline; }
+img#location-icon {
+  max-height: 30px;
+  max-width: 30px;
+  padding-top: 5px;
+  margin-top: 10px; }
+
+h3#temp-info {
+  margin-top: 10px;
+  margin-left: 10px;
+  color: grey; }
+
+h3#wind-info {
+  color: grey;
+  margin-top: 10px;
+  margin-left: -10px; }
 
 /*# sourceMappingURL=style.css.map */
