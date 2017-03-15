@@ -82,7 +82,7 @@ function saveFavLocal(){
         url ="http";
         placeObj = {
             name: placeName,
-            url: url
+            url: currentPlace.url
         };
         if ( typeof(favoriteArray) == "undefined" ){
             var favoriteArray =[];
@@ -139,7 +139,7 @@ $("#signin").on("click", function(){
             database.ref("userName/" + userName).set({
                 "id": userName,
                 //store favList as arrray or objects
-                "favList" : favoriteArray
+                "favList" : favoriteList
             });
         }   
     });
