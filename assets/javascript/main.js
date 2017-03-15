@@ -1,3 +1,28 @@
+
+//CALL FUNCTION AND ON CLICK EVENTS
+
+var currentLot = {
+    lat: null,
+    lng: null,
+    switch : false
+};
+
+var searchLocation = {
+    lat: null,
+    lng: null,
+    switch : false
+};
+
+
+var surfSpot = {
+    name: null,
+    lat: null,
+    lng: null,
+    height: null, 
+    wind: null, 
+    weather: null
+};
+
 /**
  * @file - This file manages the api calls to get the hiking places and details
  * 
@@ -17,6 +42,7 @@
  * location after they click "Allow". So we need to figure out how to show some sort of loading screen
  * while this happens and then load the first place returned by their location.
  */
+
 
 // TEXT SEARCH request
 var map;
