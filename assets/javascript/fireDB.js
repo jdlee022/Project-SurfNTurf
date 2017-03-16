@@ -13,57 +13,55 @@ var database = firebase.database();
 //Create new folders called 'hike' and 'surf' by importing fbpath.json file
 //new var count the likes:
 var likeCount = null;
+var UserlikedPlace = false;
 //When the heart is click on, i++ like counts:
-likeCountFx("#heartHike", "hike");
-likeCountFx("#heartSurf", "surf");
+
 
 function likeCountFx(heartID, typeSpot) {
-    $(heartID).on('click', function () {
-        //get the current spot's name        
-        currentName = $("#current-spot").html();
-        if (currentName !== "") {
+    //get the current spot's name        
+    currentName = $("#current-spot").html();
+    //check if database has a path for this aready
 
-        }
-        //check if database has a path for this aready
-
-        var ref = database.ref("spotsInfo/" + typeSpot);
-        //take a snapshot of current data
-        ref.once("value")
-            .then(function (snapshot) {
-                //Test if this place has info in db
-                if (snapshot.child(currentName).exists()) {
-                    //retrievve current like count 
-                    likeCount = snapshot.child(currentName + "/likes").val();
-                    spotID = snapshot.child(currentName + "/id").val();
-                    spotLng = snapshot.child(currentName + "/lng").val();
-                    spotLat = snapshot.child(currentName + "/lat").val();
-                    console.log(likeCount);
-                    //add one more like to current one:
+    var ref = database.ref("spotsInfo/" + typeSpot);
+    //take a snapshot of current data
+    ref.once("value")
+        .then(function (snapshot) {
+            //Test if this place has info in db
+            //TODO: ERROR
+            if (snapshot.child(currentName).exists()) {
+                //retrievve current like count 
+                likeCount = snapshot.child(currentName + "/likes").val();
+                spotID = snapshot.child(currentName + "/id").val();
+                spotLng = snapshot.child(currentName + "/lng").val();
+                spotLat = snapshot.child(currentName + "/lat").val();
+                console.log(likeCount);
+                //add one more like to current one:
+                if (UserlikedPlace !== true) {
                     likeCount++;
-                    console.log(likeCount);
-                    //push this back to the data count: 
-                    database.ref("spotsInfo/" + typeSpot + "/" + currentName).set({
-                        id: spotID,
-                        lat: spotLat,
-                        lng: spotLng,
-                        likes: likeCount
-                    });
-                    $("#heartCount").text(likeCount);
-                    //if the database doesn't have that path:
-                } else {
-                    //create new path to that place id and like starts at 1
-                    likeCount = 1;
-                    database.ref("spotsInfo/" + typeSpot + "/" + currentName).set({
-                        "id": currentName,
-                        "lat": 0,
-                        "lng": 0,
-                        "likes": likeCount
-                    });
-                    $("#heartCount").text(likeCount);
-                    //database.ref
-                } //else
-            }); //function
-    });
+                }
+                console.log(likeCount)
+                //push this back to the data count: 
+                database.ref("spotsInfo/" + typeSpot + "/" + currentName).set({
+                    id: spotID,
+                    lat: spotLat,
+                    lng: spotLng,
+                    likes: likeCount
+                });
+                $("#heartCount").text(likeCount);
+                //if the database doesn't have that path:
+            } else {
+                //create new path to that place id and like starts at 1
+                likeCount = 1;
+                database.ref("spotsInfo/" + typeSpot + "/" + currentName).set({
+                    "id": currentName,
+                    "lat": 0,
+                    "lng": 0,
+                    "likes": likeCount
+                });
+                $("#heartCount").text(likeCount);
+                //database.ref
+            } //else
+        }); //function
 }
 
 //Display current like of a placeName
@@ -120,6 +118,7 @@ function saveFavLocal(favorite) {
                 console.log(favPlace);
                 if ((favPlace !== undefined) && (favPlace.name === placeName)) {
                     var placeExists = true;
+                    UserlikedPlace = true;
                 }
             }
             if (placeExists !== true) {
@@ -129,6 +128,7 @@ function saveFavLocal(favorite) {
                 favoriteList = favorite;
             }
         }
+        likeCountFx("#heartHike", "hike");
         loadUserFav(favorite);
     });
 }
@@ -182,6 +182,7 @@ console.log(favoriteList);
 //TODO: save in local storage value of like switch
 function alreadyLiked(list, name, heart) {
     console.log(list);
+    //list = JSON.parse(list);
     if (list !== null) {
         for (i = 0; i < list.length; i++) {
             favPlace = list[i];
