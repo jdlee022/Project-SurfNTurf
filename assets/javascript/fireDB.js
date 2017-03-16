@@ -18,50 +18,48 @@ var UserlikedPlace = false;
 
 
 function likeCountFx(heartID, typeSpot) {
-        //get the current spot's name        
-        currentName = $("#current-spot").html();
-        //check if database has a path for this aready
-
-        var ref = database.ref("spotsInfo/" + typeSpot);
-        //take a snapshot of current data
-        ref.once("value")
-            .then(function (snapshot) {
-                //Test if this place has info in db
-                //TODO: ERROR
-                if (snapshot.child(currentName).exists()) {
-                    //retrievve current like count 
-                    likeCount = snapshot.child(currentName + "/likes").val();
-                    spotID = snapshot.child(currentName + "/id").val();
-                    spotLng = snapshot.child(currentName + "/lng").val()
-                    spotLat = snapshot.child(currentName + "/lat").val()
-                    console.log(likeCount);
-                    //add one more like to current one:
-                    if (UserlikedPlace !==true){
-                        likeCount++;
-                    }
-                    console.log(likeCount)
-                    //push this back to the data count: 
-                    database.ref("spotsInfo/" + typeSpot + "/" + currentName).set({
-                        id: spotID,
-                        lat: spotLat,
-                        lng: spotLng,
-                        likes: likeCount
-                    });
-                    $("#heartCount").text(likeCount);
-                    //if the database doesn't have that path:
-                } else {
-                    //create new path to that place id and like starts at 1
-                    likeCount = 1;
-                    database.ref("spotsInfo/" + typeSpot + "/" + currentName).set({
-                        "id": currentName,
-                        "lat": 0,
-                        "lng": 0,
-                        "likes": likeCount
-                    });
-                    $("#heartCount").text(likeCount);
-                    //database.ref
-                } //else
-            }) //function
+    //get the current spot's name        
+    currentName = $("#current-spot").html();
+    //check if database has a path for this aready
+    var ref = database.ref("spotsInfo/" + typeSpot);
+    //take a snapshot of current data
+    ref.once("value")
+        .then(function (snapshot) {
+        //Test if this place has info in db
+        //TODO: ERROR
+        if (snapshot.child(currentName).exists()) {
+            //retrievve current like count 
+            likeCount = snapshot.child(currentName + "/likes").val();
+            spotID = snapshot.child(currentName + "/id").val();
+            spotLng = snapshot.child(currentName + "/lng").val()
+            spotLat = snapshot.child(currentName + "/lat").val()
+            console.log(likeCount);
+            //add one more like to current one:
+            if (UserlikedPlace !==true){
+                likeCount++;
+            }
+            console.log(likeCount)
+            //push this back to the data count: 
+            database.ref("spotsInfo/" + typeSpot + "/" + currentName).set({
+                id: spotID,
+                lat: spotLat,
+                lng: spotLng,
+                likes: likeCount
+            });
+            $("#heartCount").text(likeCount);
+            //if the database doesn't have that path:
+        } else {
+            //create new path to that place id and like starts at 1
+            likeCount = 1;
+            database.ref("spotsInfo/" + typeSpot + "/" + currentName).set({
+                "id": currentName,
+                "lat": 0,
+                "lng": 0,
+                "likes": likeCount
+            });//database.ref
+            $("#heartCount").text(likeCount);
+        } //else
+    }) //function
 }
 
 //Display current like of a placeName
@@ -87,6 +85,7 @@ saveFavLocal("Favorite Hike Spots");
 
 function saveFavLocal(favorite) {
     $("#heartHike").on("click", function () {
+        likeCountFx("#heartHike", "hike");
         placeName = $("#current-spot").html();
         url = currentPlace.url;
         console.log(url);
@@ -102,7 +101,6 @@ function saveFavLocal(favorite) {
         //if there is no favorite array, then create one:
         if (favoriteArray == "[null]" | favoriteArray == undefined) {
             var favoriteArray = [];
-            pushNsaveFav(favorite, favoriteArray, placeObj);
             favoriteArray.push(placeObj);
             favoriteArray = JSON.stringify(favoriteArray);
             localStorage.setItem(favorite, favoriteArray);
@@ -128,33 +126,32 @@ function saveFavLocal(favorite) {
                 favoriteList = favorite;
             }
         }
-        likeCountFx("#heartHike", "hike");
         loadUserFav(favorite);
     });
 }
 
-function pushNsaveFav(favorite, array, obj) {
-    array.push(obj);
-    array = JSON.stringify(array);
-    localStorage.setItem(favorite, array);
-    favoriteList = favorite;
-}
+// function pushNsaveFav(favorite, array, obj) {
+//     array.push(obj);
+//     array = JSON.stringify(array);
+//     localStorage.setItem(favorite, array);
+//     favoriteList = favorite;
+// }
 
-function checkFavList(list, name, favorite, array, obj) {
-    //if the name already in there: 
-    list = JSON.parse(list);
-    for (i = 0; i <= list.length; i++) {
-        favPlace = list[i];
-        console.log(i);
-        console.log(favPlace);
-        if ((favPlace !== undefined) && (favPlace.name === name)) {
-            var placeExists = true;
-        }
-    };
-    if (placeExists != true) {
-        pushNsaveFav(favorite, array, obj);
-    }
-}
+// function checkFavList(list, name, favorite, array, obj) {
+//     //if the name already in there: 
+//     list = JSON.parse(list);
+//     for (i = 0; i <= list.length; i++) {
+//         favPlace = list[i];
+//         console.log(i);
+//         console.log(favPlace);
+//         if ((favPlace !== undefined) && (favPlace.name === name)) {
+//             var placeExists = true;
+//         }
+//     };
+//     if (placeExists != true) {
+//         pushNsaveFav(favorite, array, obj);
+//     }
+// }
 
 //Create a button for the hamberger
 loadUserFav("Favorite Hike Spots");
