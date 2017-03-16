@@ -1,7 +1,6 @@
 .ui-autocomplete-input{
     border-radius: 0;
     list-style:none;
-    border:solid 1px black;
     padding:10px;
     opacity:0.5;
     font-weight:bolder;
@@ -11,12 +10,30 @@
     height:30px;
     transition: width 3s;
     transition-timing-function:ease-in-out;
-    /*transition-delay:0.5s;*/
-	margin-left:-25px
+	margin-left:-16px;
+	margin-top: 22px;
+	padding-bottom:-1px;
+}
+#searchText{
+	top:-10px;
+	left:30px;
+	position:absolute;
+
+}
+.inputDisappear.clicked{
+	left:34px !important;
+	width:34px !important;
+	margin-left: -17px;
 }
 .glyphicon.glyphicon-search{
-	top:5px;
-	right:-5px
+	top:16px;
+	right:-19px;
+	margin:0;
+}
+.glyphicon-search.clicked{
+	top:16px;
+	right:-22px;
+	margin:0;
 }
 .ui-menu{
 	list-style:none;
@@ -32,7 +49,12 @@
 	font-weight:bold;
 }
 .favoritesHeader{
-	border:solid 2px black;
+	width:320px;
+	/*border-radius:10px;
+	background: black;
+	opacity: 0.6;
+	box-shadow: 0 0 10px 5px black;
+	border-bottom:none;*/
 }
 .favoritesHeader i{
 	margin:10px 0 10px 15px;
@@ -41,15 +63,60 @@
 	font-size:125%;
 	float:right;
 	margin: 10px 10px 0 0;
+	color:white;
 }
 .favoritesContentArea{
-	border:solid 2px black;
+	width:320px;
 	height:150px;
 	font-size:150%;
+	border-top:none;
+	/*border-radius:10px;
+	background: black;
+	opacity: 0.6;
+	/*box-shadow: 0 0 10px 5px black;*/
+}
+.favoritesContentArea.clicked{
+	display:none;
+}
+.favoritesContentArea img{
+	filter: invert(100%);
+	opacity: 0.8;
+}
+.favoritesContentArea p{
+	color:white;
+}
+.glyphicon-align-justify{
+	font-size:250%;
+	opacity:0.4;
+}
+.glyphicon-align-justify:hover{
+	opacity:0.8;
+	transition-delay:0.2s;
+}
+.glyphicon-heart{
+	font-size:250%;
+	opacity: 0.4;
+}
+.glyphicon-heart:hover{
+	opacity:0.8;
+	transition-delay:0.2s;
 }
 .favoritesWrapper{
+	position:relative;
+	left:12px;
 	margin:15px;
 	padding: 10px 0 0 10px;
+	border-radius:10px;
+	background: black;
+	opacity: 0.6;
+	box-shadow: 0 0 3px 3px black;
+	width: 29%;
+}
+.favoritesWrapper.clicked{
+	height:11%;
+	width:29%;
+	transition: height 3s;
+    transition-timing-function:ease-in-out;
 }
 .ui-widget-content .ui-state-focus
 {   background: blue;
@@ -62,10 +129,10 @@ input{
 	/*opacity:0;*/
 	transition: width 3s;
 	bottom:10px;
+	padding-bottom:15px;
 }
 .clicked{
 	width:200px;
-	margin: 22px 0 0 18px;
 }
 .inputDisappear{
 	width:10px;
@@ -76,7 +143,7 @@ input{
 
 }
 body{
-	background-image:url("../images/surf.jpg");
+	background-image: url("http://www.southcoast.com/blog/wp-content/uploads/RylandR.MainlandMex.PeteR_.jpg");
 	width:1100px;
 	/*position:relative;*/
 }
@@ -110,50 +177,122 @@ h1 .infoBar{
 	margin-top:0;
 	padding-top:0;
 }
+.waterTemp h2 {
+	font-size:24px;
+	margin: 5px auto
+}
+.waterTemp img{
+	margin: px auto;
+	filter: invert(100%);
+}
+.wind img{
+	margin: 0px auto;
+	filter: invert(100%);
+}
+.wind h3{
+	margin: 5px auto;
+	font-size: 22px;
+}
+.surfHeight h2{
+	font-size:24px;
+	margin: 5px auto;
+}
+.surfHeight img{
+	margin: -4px auto;
+	filter: invert(100%);
+}
+.poorFairGood p{
+	margin:0px auto;
+}
 .infoBar{
 	position:absolute;
 	padding:0 10px 10px 10px;
-	border:solid 2px black;
+	background-color: black;
+	opacity: 0.6;
+	color:white;
 	left:20px;
 	top:225px;
 	margin:20px;
-	width:420px;
+	width:320px;
+	height: 240px;
+	-webkit-transition: height 1s; /* Safari */
+    transition: height 1s;
+	-webkit-transition-timing-function: ease-in-out;
+	border-radius:4px;
+	box-shadow: 0 0 3px 3px black;
 }
 .spotName{
 	margin-top:0px;
-	border-bottom: solid 2px black;
+	border-bottom: solid 2px white;
 	font-size:250%;
 	padding-bottom:10px;
 	text-align:center;
+}
+.spotName.h2{
+	color:white;
+	font-size:280%;
+	padding-right:10px;
+	margin-top:0;
 }
 .detailsWrapper{
 	font-size:125%;
 	font-weight:bold;
 	text-align:center;
 }
-h2{
-	color:black;
+h2, h3{
+	color:white !important;
+}
+#poorFairGood p{
+	width:100%;
+	margin: 5px auto;
+}
+#poorFairGood i{
+	margin:10px 2.5px 0 2.5px;
+	color:white;
 }
 .detailsWrapper .col-sm-3{
 	padding-right:5px;
+	padding-left:0;
+	font-size:120%;
+	float:left;
 }
 .searchWrapper{
+	clear:both;
 	position:absolute;
-	top:240px;
-	right:-83px;
-	border:solid 2px black;
+	top:150px;
+	right:-77px;
+	background-color: black;
+	opacity: 0.6;
 	padding-bottom:20px;
-	width:325px;
-	height:75px;
+	width:320px;
+	height:60px;
+	border-radius:4px;
+	box-shadow: 0 0 3px 3px black;
+}
+#emptyField{
+	color:red;
+	position:absolute;
+	top: -5px;
+	left:16px;
+}
+.searchWrapper.clicked{
+	/*top:55px;*/
+	transform: translateY(-100px);
+	transition: transform 0.7s ease-in-out;
+	/*-webkit-transition: height 3s;*/
+}
+.searchWrapper.moveUp{
+	transform: translateY(-158px);
+	transition: transform 1s ease-in-out;
 }
 button{
 	position:absolute;
-	right:5px;
-	top:24px;
+	right:13px;
+	top:11px;
 }
 #myChart{
-	width:400px !important;
-	height:400px !important;
+	width:300px !important;
+	height:300px !important;
 	float:right;
 	right:0px !important;
 	top:0px !important;
@@ -162,44 +301,74 @@ canvas{
 	right:100px;
 }
 #myChart.clicked{
-	margin-bottom:
+	
 }
 .glyphicon.glyphicon-arrow-left{
-	font-size:175%;
+	font-size:150%;
 	margin:0;
 	padding:0;
 }
 .glyphicon.glyphicon-map-marker{
-	font-size:75%
+	font-size:75%;
+	margin-right:5px;
 }
 .glyphicon-thumbs-up{
 	display:block;
-	font-size:200%;
+	font-size:153%;
 	float:left;
 	color:black;
 	margin-left:0;
 }
 .glyphicon-thumbs-down{
-	font-size:210%;
+	font-size:160%;
 	float:left;
 	color:black;
 	margin-left:5px;
 }
 .glyphicon.glyphicon-menu-down{
 	clear:both;
+	position:absolute;
 	font-size:200%;
 	display:block;
 	text-align:center;
-	margin-top:5px
+	margin-top:5px;
+	top:209px;
+	left:142px;
 }
 .glyphicon.glyphicon-menu-down.clicked{
 	-webkit-transform: rotate(180deg);
-	-webkit-transition: height 3s;
-	bottom:0;
+	transition: transform 0.7s ease-in-out;
+	bottom:5px;
 	position:absolute;
-	left: 90px;
+	left: 35px;
 }
 .infoBar.clicked{
-	left:21px;
-	top: -33px;
+	left:20px;
+	top: 40px;
+	overflow:auto;
+	-webkit-transition: height 1s; /* Safari */
+    transition: height 1s;
+	-webkit-transition-timing-function: ease-in-out;
+	height:520px;
 }
+html,
+body {
+  height: 100%; }
+
+.carousel,
+.item,
+.active {
+  height: 100%; }
+
+.carousel-inner {
+  height: 100%; }
+
+/* Background images are set within the HTML using inline CSS, not here */
+.fill {
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover; }
