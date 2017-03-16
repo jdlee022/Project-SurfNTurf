@@ -255,6 +255,7 @@ $("#modalInput").keypress(function (e) {
 
 
 //APPEND INFO in hike.html
+
 function infoHike(current) {
     $("#spot-name").html("<a id='current-spot' href='" + current.url + "' target='_blank'>" + current.name + "</a>");
     console.log("<a href='" + current.url + "'>" + current.name + "</a>");
@@ -271,4 +272,5 @@ function getNewPlace() {
 }
 
 $('#myModal').modal('show');
+//initialize data based on current location when page loads
 initMap();

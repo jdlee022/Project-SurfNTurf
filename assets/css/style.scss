@@ -56,7 +56,7 @@ div#content-box.container {
   position: fixed;
   bottom: 25px;
   left: 25px;
-  height: 230px;
+  height: auto;
   width: 450px;
   border-radius: 10px;
   background-color: black;
@@ -76,18 +76,20 @@ h1#surf-title {
 color: white;
 font-size: $title-font-size;
 font-weight: 800;
-text-shadow: -5px 0px 0px #49d4ed;
+text-shadow: -5px 0px 0px #00B2A1;
 
   
 }
 
 h1#hike-title {
-text-shadow: -7px 0px 0px #000000;
+text-shadow: -7px 0px 0px #824021;
 color: white;
 font-size: $title-font-size;
 font-weight: 800;
 
 }
+
+
 
  
 
@@ -110,16 +112,32 @@ img#location-icon {
     margin-top: 10px;
 }
 
-
+img#current-weather.icon {
+    width: 60px;
+    height: 60px;
+}
 
 div#name-spot {
+display: block;
+  width: 400px;
   
 }
+
+
 
 h3#temp-info {
     margin-top: 10px;
     margin-left: 10px;
     color: grey;
+}
+
+h3#weather-info {
+
+    color: grey;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    margin-left: -10px;
+
 }
 
 h3#wind-info {
@@ -128,6 +146,13 @@ h3#wind-info {
     margin-left: -10px;
     margin-bottom: 20px;
 
+}
+
+h3#rating-info {
+    color: grey;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 20px;
 }
 
 h3#spot-name {
@@ -141,6 +166,12 @@ h3#spot-name:hover {
     margin-bottom: 5%;
     text-decoration: none;
     color:white;
+}
+
+h3#heartCount {
+    position: fixed;
+    top: 20px;
+    left: 140px;
 }
 
 
@@ -182,6 +213,12 @@ div.favoritesHeaderText {
    margin-left: -30px;
 }
 
+div#favoritesContentArea {
+    overflow: auto;
+    height: 160px;
+    padding-left: 10px;
+}
+
 i {
     margin-top: 15px;
     margin-left: 15px;
@@ -198,36 +235,39 @@ i.glyphicon-align-justify:hover {
     transition-duration: .5s;
 }
 
-i.glyphicon-heart:hover {
+i.glyphicon-align-justify {
+    position: fixed;
+    top: 20px;
+    left: 20px;
 
 }
 
-.heartColor{
+i.glyphicon-heart {
+    position: fixed;
+    top: 20px;
+    left: 75px;
+}
+
+.heartColor {
     color: red;
 }
 
-.loading-gif {
-    display:    none;
-    position:   fixed;
-    z-index:    1000;
-    top:        0;
-    left:       0;
-    height:     100%;
-    width:      100%;
-    background: rgba( 255, 255, 255, .8 ) 
-                url('http://i.stack.imgur.com/FhHRx.gif') 
-                50% 50% 
-                no-repeat;
+
+a {
+    color: grey;
+    text-decoration: none;
 }
 
-/* When the body has the loading class, we turn
-   the scrollbar off with overflow:hidden */
-body.loading {
-    overflow: hidden;   
+a:hover {
+    color:white;
+    text-decoration: none;
 }
 
-/* Anytime the body has the loading class, our
-   modal element will be visible */
-body.loading .loading-gif {
-    display: block;
+a:visited {
+    color: grey;
+    text-decoration: none;
+}
+
+a#hike-link {
+    color: white;
 }
