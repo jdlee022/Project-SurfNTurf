@@ -179,13 +179,14 @@ console.log(favoriteList);
 
 //TODO: save in local storage value of like switch
 function alreadyLiked(list, name, heart) {
+    console.log(list);
     list = JSON.parse(list);
-    console.log(typeof(list));
     if (list !== null) {
         for (i = 0; i < list.length; i++) {
             favPlace = list[i];
+            console.log(i);
             console.log(favPlace);
-            if (name === favPlace.name) {
+            if (favPlace.name === name) {
                 $(heart).addClass("heartColor");
             }
         }
