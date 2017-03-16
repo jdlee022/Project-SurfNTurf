@@ -54,10 +54,10 @@ h1#surf-title {
   color: white;
   font-size: 150px;
   font-weight: 800;
-  text-shadow: -5px 0px 0px #49d4ed; }
+  text-shadow: -5px 0px 0px #00B2A1; }
 
 h1#hike-title {
-  text-shadow: -7px 0px 0px #000000;
+  text-shadow: -7px 0px 0px #824021;
   color: white;
   font-size: 150px;
   font-weight: 800; }
@@ -196,5 +196,8 @@ a:hover {
 a:visited {
   color: grey;
   text-decoration: none; }
+
+a#hike-link {
+  color: white; }
 
 /*# sourceMappingURL=style.css.map */

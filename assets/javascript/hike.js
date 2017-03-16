@@ -1,9 +1,27 @@
-//hide the favorites list
+$(document).ready(function() {
+    
+    //hide the favorites list
 $( "#favList" ).click(function() {
   $( "#favoritesWrapper" ).toggle( "slow", function() {
     
   });
 });
 
-//fluidly resize spot-name text
-//$("#name-spot").fitText(2.5);
+
+
+//change background image on hover
+  $('#hike-title').hover(function() {
+    $('body').css('background-image', 'url("assets/images/hikeIndex.png")');
+  }, function() {
+   
+    $('body').css('background-image', 'url("https://fast-company-res.cloudinary.com/image/upload/fc/3039266-poster-p-1-your-windowless-cubicle-is-doing-horrible-things-for-your-sleep-and-mental-health.jpg")');
+  });
+
+});
+
+ $('#surf-title').hover(function() {
+    $('body').css('background-image', 'url("https://static.pexels.com/photos/35007/pexels-photo.jpg")');
+  }, function() {
+   
+    $('body').css('background-image', 'url("https://fast-company-res.cloudinary.com/image/upload/fc/3039266-poster-p-1-your-windowless-cubicle-is-doing-horrible-things-for-your-sleep-and-mental-health.jpg")');
+  });
