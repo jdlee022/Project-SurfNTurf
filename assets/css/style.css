@@ -40,7 +40,7 @@ div#content-box.container {
   position: fixed;
   bottom: 25px;
   left: 25px;
-  height: 230px;
+  height: auto;
   width: 450px;
   border-radius: 10px;
   background-color: black;
@@ -76,15 +76,35 @@ img#location-icon {
   padding-top: 5px;
   margin-top: 10px; }
 
+img#current-weather.icon {
+  width: 60px;
+  height: 60px; }
+
+div#name-spot {
+  display: block;
+  width: 400px; }
+
 h3#temp-info {
   margin-top: 10px;
   margin-left: 10px;
   color: grey; }
 
+h3#weather-info {
+  color: grey;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  margin-left: -10px; }
+
 h3#wind-info {
   color: grey;
   margin-top: 10px;
   margin-left: -10px;
+  margin-bottom: 20px; }
+
+h3#rating-info {
+  color: grey;
+  margin-top: 10px;
+  margin-left: 10px;
   margin-bottom: 20px; }
 
 h3#spot-name {
@@ -97,6 +117,11 @@ h3#spot-name:hover {
   margin-bottom: 5%;
   text-decoration: none;
   color: white; }
+
+h3#heartCount {
+  position: fixed;
+  top: 20px;
+  left: 140px; }
 
 button#newPlace {
   margin-left: 25%;
@@ -129,6 +154,11 @@ div#favoritesWrapper {
 div.favoritesHeaderText {
   margin-left: -30px; }
 
+div#favoritesContentArea {
+  overflow: auto;
+  height: 160px;
+  padding-left: 10px; }
+
 i {
   margin-top: 15px;
   margin-left: 15px;
@@ -142,7 +172,29 @@ i.glyphicon-align-justify:hover {
   color: white;
   transition-duration: .5s; }
 
+i.glyphicon-align-justify {
+  position: fixed;
+  top: 20px;
+  left: 20px; }
+
+i.glyphicon-heart {
+  position: fixed;
+  top: 20px;
+  left: 75px; }
+
 .heartColor {
   color: red; }
+
+a {
+  color: grey;
+  text-decoration: none; }
+
+a:hover {
+  color: white;
+  text-decoration: none; }
+
+a:visited {
+  color: grey;
+  text-decoration: none; }
 
 /*# sourceMappingURL=style.css.map */
