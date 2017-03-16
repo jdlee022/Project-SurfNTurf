@@ -41,7 +41,7 @@ div#content-box.container {
   bottom: 25px;
   left: 25px;
   height: 230px;
-  width: 400px;
+  width: 450px;
   border-radius: 10px;
   background-color: black;
   opacity: 0.6;
@@ -141,5 +141,8 @@ i.glyphicon-heart:hover {
 i.glyphicon-align-justify:hover {
   color: white;
   transition-duration: .5s; }
+
+.heartColor {
+  color: red; }
 
 /*# sourceMappingURL=style.css.map */
