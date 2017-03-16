@@ -1,16 +1,15 @@
-
 //CALL FUNCTION AND ON CLICK EVENTS
 
 var currentLot = {
     lat: null,
     lng: null,
-    switch : false
+    switch: false
 };
 
 var searchLocation = {
     lat: null,
     lng: null,
-    switch : false
+    switch: false
 };
 
 
@@ -18,8 +17,8 @@ var surfSpot = {
     name: null,
     lat: null,
     lng: null,
-    height: null, 
-    wind: null, 
+    height: null,
+    wind: null,
     weather: null
 };
 
@@ -72,7 +71,7 @@ function getWeather(lat, lng, place) {
         })
         .done(function (response) {
             temp = Math.floor(response.main.temp).toString();
-            wind =  Math.floor(response.wind.speed).toString();
+            wind = Math.floor(response.wind.speed).toString();
             place.temp = Math.floor(response.main.temp);
             place.wind = Math.floor(response.main.wind);
             place.weatherIcon = response.weather[0].icon;
@@ -82,7 +81,7 @@ function getWeather(lat, lng, place) {
             $("#current-weather").attr("src", "assets/images/weather-api-icons/" + place.weatherIcon + ".png");
             $("#current-weather").attr("style", "");
             $("#weather-info").html(place.weather);
-            
+
         });
 }
 
@@ -195,17 +194,18 @@ function detailsCallback(place, status) {
         //set currentPlace after all info has been added
         places[counter - 1].photos = currentPhotos;
         places[counter - 1].rating = place.rating;
-        
+
         currentPlace = places[counter - 1];
         $("#rating-info").html(currentPlace.rating);
         console.log("currentPlace:");
         console.log(currentPlace);
+        getPhotos();
         infoHike(currentPlace);
     }
 }
 
 /** Gets the photos for the given place */
-function getPhotos(currentPlace) {
+function getDetails(currentPlace) {
     //GET details for the current place
     var detailsRequest = {
         placeId: currentPlace.placeId
@@ -213,10 +213,29 @@ function getPhotos(currentPlace) {
     service.getDetails(detailsRequest, detailsCallback);
 }
 
+function getPhotos() {
+    //set carousel indicators based on how many photos there are
+    $(".carousel-indicators").html("");
+    $(".carousel-indicators").append("<li data-target='#myCarousel' data-slide-to='0' class='active'></li>");
+    //set the first background photo in carousel with an active class
+    $(".carousel-inner").html("");
+    var newActiveItem = $("<div class='item active'></div>");
+    newActiveItem.append("<div class='fill' style='background-image:url(" + currentPlace.photos[0] + ");'></div>");
+    $(".carousel-inner").append(newActiveItem);
+    //append the rest of the photos to carousel
+    for (var i = 1; i < currentPlace.photos.length; i++) {
+        var newItem = $("<div class='item'></div>");
+        newItem.append("<div class='fill' style='background-image:url(" + currentPlace.photos[i] + ");'></div>");
+        $(".carousel-inner").append(newItem);
+        //add a carousel indicator for each photo
+        $(".carousel-indicators").append("<li data-target='#myCarousel' data-slide-to='"+i+"'></li>");
+    }
+}
+
 /** When the user clicks a button to load a new place update the array of current pictures */
 $("#newPlace").on("click", function () {
     getWeather(places[counter].lat, places[counter].lng, places[counter]);
-    getPhotos(places[counter]);
+    getDetails(places[counter]);
 
     counter = counter % (places.length - 1);
     counter++;
@@ -228,13 +247,14 @@ $("#modalSearch").on("click", function () {
     $('#myModal').modal('hide');
     initializePlaces(0.0, 0.0);
     // getWeather(places[counter].lat, places[counter].lng, places[counter]);
-    // getPhotos(places[counter]);
     //counter++;
 });
 
 //APPEND INFO in hike.html
-function infoHike(current){
-    $("#spot-name").html("<a id='current-spot' href='"+ current.url + "' target='_blank'>"+ current.name + "</a>");
+
+function infoHike(current) {
+    $("#spot-name").html("<a id='current-spot' href='" + current.url + "' target='_blank'>" + current.name + "</a>");
+    console.log("<a href='" + current.url + "'>" + current.name + "</a>");
     dispLikes();
     currentName = $("#current-spot").html();
     alreadyLiked(favoriteList, currentName, "#heartHike");

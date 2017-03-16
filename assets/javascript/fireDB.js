@@ -31,11 +31,11 @@ function likeCountFx(heartID, typeSpot) {
             //retrievve current like count 
             likeCount = snapshot.child(currentName + "/likes").val();
             spotID = snapshot.child(currentName + "/id").val();
-            spotLng = snapshot.child(currentName + "/lng").val()
-            spotLat = snapshot.child(currentName + "/lat").val()
+            spotLng = snapshot.child(currentName + "/lng").val();
+            spotLat = snapshot.child(currentName + "/lat").val();
             console.log(likeCount);
             //add one more like to current one:
-            if (UserlikedPlace !==true){
+            if (UserlikedPlace !== true) {
                 likeCount++;
             }
             console.log(likeCount)
@@ -56,10 +56,11 @@ function likeCountFx(heartID, typeSpot) {
                 "lat": 0,
                 "lng": 0,
                 "likes": likeCount
-            });//database.ref
+            });
             $("#heartCount").text(likeCount);
+            //database.ref
         } //else
-    }) //function
+    }); //function
 }
 
 //Display current like of a placeName
@@ -99,7 +100,7 @@ function saveFavLocal(favorite) {
             liked: true
         };
         //if there is no favorite array, then create one:
-        if (favoriteArray == "[null]" | favoriteArray == undefined) {
+        if (favoriteArray == "[null]" | favoriteArray === undefined) {
             var favoriteArray = [];
             favoriteArray.push(placeObj);
             favoriteArray = JSON.stringify(favoriteArray);
@@ -118,8 +119,8 @@ function saveFavLocal(favorite) {
                     var placeExists = true;
                     UserlikedPlace = true;
                 }
-            };
-            if (placeExists != true) {
+            }
+            if (placeExists !== true) {
                 favoriteArray.push(placeObj);
                 favoriteArray = JSON.stringify(favoriteArray);
                 localStorage.setItem(favorite, favoriteArray);
@@ -130,28 +131,28 @@ function saveFavLocal(favorite) {
     });
 }
 
-// function pushNsaveFav(favorite, array, obj) {
-//     array.push(obj);
-//     array = JSON.stringify(array);
-//     localStorage.setItem(favorite, array);
-//     favoriteList = favorite;
-// }
+function pushNsaveFav(favorite, array, obj) {
+    array.push(obj);
+    array = JSON.stringify(array);
+    localStorage.setItem(favorite, array);
+    favoriteList = favorite;
+}
 
-// function checkFavList(list, name, favorite, array, obj) {
-//     //if the name already in there: 
-//     list = JSON.parse(list);
-//     for (i = 0; i <= list.length; i++) {
-//         favPlace = list[i];
-//         console.log(i);
-//         console.log(favPlace);
-//         if ((favPlace !== undefined) && (favPlace.name === name)) {
-//             var placeExists = true;
-//         }
-//     };
-//     if (placeExists != true) {
-//         pushNsaveFav(favorite, array, obj);
-//     }
-// }
+function checkFavList(list, name, favorite, array, obj) {
+    //if the name already in there: 
+    list = JSON.parse(list);
+    for (i = 0; i <= list.length; i++) {
+        favPlace = list[i];
+        console.log(i);
+        console.log(favPlace);
+        if ((favPlace !== undefined) && (favPlace.name === name)) {
+            var placeExists = true;
+        }
+    }
+    if (placeExists !== true) {
+        pushNsaveFav(favorite, array, obj);
+    }
+}
 
 //Create a button for the hamberger
 loadUserFav("Favorite Hike Spots");
