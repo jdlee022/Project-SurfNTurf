@@ -176,44 +176,19 @@ function loadUserFav(list) {
     }
 }
 console.log(favoriteList);
+
 //TODO: save in local storage value of like switch
 function alreadyLiked(list, name, heart) {
-    console.log(list);
-    //list = JSON.parse(list);
+    list = JSON.parse(list);
+    console.log(typeof(list));
     if (list !== null) {
         for (i = 0; i < list.length; i++) {
             favPlace = list[i];
-            console.log(i);
             console.log(favPlace);
-            if (favPlace.liked === true) {
+            if (name === favPlace.name) {
                 $(heart).addClass("heartColor");
             }
         }
     }
 
 }
-
-
-
-// //check or create new user using user name: 
-// $("#signin").on("click", function(){
-//     userName = $("input[name=userName").val();
-//     //check if userName has space:
-//     //check if this user name is already in the firebase:
-//     var ref = database.ref("userName/");
-//         //take a snapshot of current data
-//     ref.once("value")
-//         .then(function(snapshot){
-//         //Test if this place has info in db
-//         if (snapshot.child(userName).exists()){
-//             id = snapshot.child(userName + "/id").val();
-//             favList = snapshot.child(userName + "/favList").val();
-//         } else {
-//             database.ref("userName/" + userName).set({
-//                 "id": userName,
-//                 //store favList as arrray or objects
-//                 "favList" : favoriteList
-//             });
-//         }   
-//     });
-// });

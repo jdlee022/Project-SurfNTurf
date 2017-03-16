@@ -235,13 +235,10 @@ $("#modalSearch").on("click", function () {
 //APPEND INFO in hike.html
 function infoHike(current){
     $("#spot-name").html("<a id='current-spot' href='"+ current.url + "' target='_blank'>"+ current.name + "</a>");
-    console.log("<a href='"+ current.url + "'>"+ current.name + "</a>");
     dispLikes();
     currentName = $("#current-spot").html();
     alreadyLiked(favoriteList, currentName, "#heartHike");
 }
-
-//PHOTOS OF PLACE
 
 //initialize data based on current location when page loads
 initMap();
