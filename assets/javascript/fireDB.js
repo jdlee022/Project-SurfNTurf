@@ -84,7 +84,7 @@ function dispLikes() {
 }
 
 //Store user's data in the storage:
-var favoriteList = localStorage.getItem("Favorite Hike Spots")
+var favoriteList = localStorage.getItem("Favorite Hike Spots");
 saveFavLocal("Favorite Hike Spots");
 
 function saveFavLocal(favorite) {
@@ -182,7 +182,6 @@ console.log(favoriteList);
 //TODO: save in local storage value of like switch
 function alreadyLiked(list, name, heart) {
     console.log(list);
-    list = JSON.parse(list);
     if (list !== null) {
         for (i = 0; i < list.length; i++) {
             favPlace = list[i];
