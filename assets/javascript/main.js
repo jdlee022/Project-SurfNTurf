@@ -236,6 +236,7 @@ function infoHike(current){
     alreadyLiked(favoriteList, currentName, "#heartHike");
 }
 
+//PHOTOS OF PLACE
 
 //initialize data based on current location when page loads
 initMap();
