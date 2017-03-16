@@ -35,12 +35,12 @@ function likeCountFx(heartID, typeSpot) {
                     //retrievve current like count 
                     likeCount = snapshot.child(currentName + "/likes").val();
                     spotID = snapshot.child(currentName + "/id").val();
-                    spotLng = snapshot.child(currentName + "/lng").val()
-                    spotLat = snapshot.child(currentName + "/lat").val()
+                    spotLng = snapshot.child(currentName + "/lng").val();
+                    spotLat = snapshot.child(currentName + "/lat").val();
                     console.log(likeCount);
                     //add one more like to current one:
                     likeCount++;
-                    console.log(likeCount)
+                    console.log(likeCount);
                     //push this back to the data count: 
                     database.ref("spotsInfo/" + typeSpot + "/" + currentName).set({
                         id: spotID,
@@ -62,7 +62,7 @@ function likeCountFx(heartID, typeSpot) {
                     $("#heartCount").text(likeCount);
                     //database.ref
                 } //else
-            }) //function
+            }); //function
     });
 }
 
@@ -102,7 +102,7 @@ function saveFavLocal(favorite) {
             liked: true
         };
         //if there is no favorite array, then create one:
-        if (favoriteArray == "[null]" | favoriteArray == undefined) {
+        if (favoriteArray == "[null]" | favoriteArray === undefined) {
             var favoriteArray = [];
             pushNsaveFav(favorite, favoriteArray, placeObj);
             favoriteArray.push(placeObj);
@@ -121,8 +121,8 @@ function saveFavLocal(favorite) {
                 if ((favPlace !== undefined) && (favPlace.name === placeName)) {
                     var placeExists = true;
                 }
-            };
-            if (placeExists != true) {
+            }
+            if (placeExists !== true) {
                 favoriteArray.push(placeObj);
                 favoriteArray = JSON.stringify(favoriteArray);
                 localStorage.setItem(favorite, favoriteArray);
@@ -150,8 +150,8 @@ function checkFavList(list, name, favorite, array, obj) {
         if ((favPlace !== undefined) && (favPlace.name === name)) {
             var placeExists = true;
         }
-    };
-    if (placeExists != true) {
+    }
+    if (placeExists !== true) {
         pushNsaveFav(favorite, array, obj);
     }
 }
