@@ -73,11 +73,15 @@ function getWeather(lat, lng, place) {
         .done(function (response) {
             temp = Math.floor(response.main.temp).toString();
             wind =  Math.floor(response.wind.speed).toString();
-            console.log(response);
             place.temp = Math.floor(response.main.temp);
             place.wind = Math.floor(response.main.wind);
-            $("#temp-info").text(temp + "°");
-            $("#wind-info").text(wind + "mph");
+            place.weatherIcon = response.weather[0].icon;
+            place.weather = response.weather[0].main;
+            $("#temp-info").html(temp + "°");
+            $("#wind-info").html(wind + "mph");
+            $("#current-weather").attr("src", "assets/images/weather-api-icons/" + place.weatherIcon + ".png");
+            $("#current-weather").attr("style", "");
+            $("#weather-info").html(place.weather);
             
         });
 }
@@ -153,7 +157,8 @@ function searchCallback(results, status) {
                 //need to update photos after calling getDetails with this place's id
                 photos: null,
                 rating: null,
-                weather: null
+                weather: null,
+                weatherIcon: null
             };
             places.push(thisPlace);
 
@@ -190,11 +195,11 @@ function detailsCallback(place, status) {
         //set currentPlace after all info has been added
         places[counter - 1].photos = currentPhotos;
         places[counter - 1].rating = place.rating;
-        places[counter - 1].temp
+        
         currentPlace = places[counter - 1];
+        $("#rating-info").html(currentPlace.rating);
         console.log("currentPlace:");
         console.log(currentPlace);
-        console.log(currentPlace.photos);
         infoHike(currentPlace);
     }
 }
