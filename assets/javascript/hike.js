@@ -4,7 +4,7 @@ $(document).ready(function() {
     $( "#favoritesWrapper" ).toggle();
 
     //hide the favorites list
-    $("#favHikeBtn").click(function () {
+    $("#favList").click(function () {
         $("#favoritesWrapper").toggle("slow", function () {
 
         });
