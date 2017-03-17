@@ -32,21 +32,23 @@ $("#favHikeBtn").on("click", function(){
 
 $("#heartHike").on("click", function () {
     //check in the list 
+    currentName = $("#current-spot").html();
     heartForFavPlace("#heartHike", favoriteList, "Favorite Hike Spots",  currentName);
     likeCountFx("#heartHike", "hike");
 });
 
+//Get local storage fav list and display it
 $("#favSurfBtn").on("click", function(){ 
-    loadUserFav("Favorite Surf Spots", ".favoritesContentArea");
+    loadUserFav("Favorite Surf Spots", "#favSurfList");
 });
 
 $("#heartSurf").on("click", function () {
-    //check in the list 
-    heartForFavPlace("#heartSurf", favoriteList, currentName);
-    saveFavLocal("Favorite Surf Spots");
+    //check in the list
+    //EDIT
+    currentName = $("#current-spot").html(); 
+    heartForFavPlace("#heartSurf", favoriteList, "Favorite Surf Spots",  currentName);
     likeCountFx("#heartSurf", "surf");
 });
-
 
 
 //Initial display the current likes of a place when click next 
