@@ -166,7 +166,8 @@ div.favoritesHeaderText {
 div#favoritesContentArea {
   overflow: auto;
   height: 240px;
-  padding-left: 10px; }
+  padding-left: 10px;
+  font-size: 20px; }
 
 i {
   margin-top: 15px;
