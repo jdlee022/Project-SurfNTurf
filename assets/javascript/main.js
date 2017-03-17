@@ -104,6 +104,8 @@ function initMap() {
     }, function () {
         //if geolocation doesnt work then prompt user to enter a location
         $('#myModal').modal('show');
+        $("#modalInput").focus();
+        $("#search-box").select();
         //locationSearch = prompt("Cannot get your current location! Please enter a location (eg. 'La Jolla')");
 
     }, {
@@ -111,6 +113,8 @@ function initMap() {
     });
     */
     $('#myModal').modal('show');
+    $("#modalInput").focus();
+    $("#search-box").select();
 }
 
 /** gets places based on given lat & lng */
@@ -258,6 +262,21 @@ $("#modalInput").keypress(function (e) {
     }
 });
 
+$("#search-box").keypress(function (e) {
+    if (e.which === 13) {
+        locationSearch = $("#search-box").val().trim();
+        $("#search-box").html("");
+        $("#search-box-spot").hide("slow", function () {
+            $("#location-icon-spot").show();
+            $("#name-spot").show();
+        });
+        initializePlaces(32.7157, -117.1611);
+        setTimeout(getNewPlace, 2000);
+        $("#search-box").val("");
+    }
+});
+
+
 
 //APPEND INFO in hike.html
 
@@ -277,5 +296,7 @@ function getNewPlace() {
 }
 
 $('#myModal').modal('show');
+$("#modalInput").focus();
+$("#search-box").select();
 //initialize data based on current location when page loads
 initMap();

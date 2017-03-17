@@ -15,8 +15,6 @@ $(document).ready(function() {
     });
 
     //search bar control
-
-
     $("#search-icon").click(function () {
 
         if ($("#search-box-spot").css('display') == 'none') {
@@ -25,11 +23,12 @@ $(document).ready(function() {
             $("#location-icon-spot").hide();
             $("#name-spot").hide();
             $("#search-box-spot").show("slow", function () {
-
+                $("#search-box").focus();
+                $("#search-box").select();
             });
 
         } else {
-
+            $("#search-box").val("");
             $("#search-box-spot").hide("slow", function () {
                 $("#location-icon-spot").show();
                 $("#name-spot").show();
