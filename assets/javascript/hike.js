@@ -15,7 +15,7 @@ $(document).ready(function () {
     $("#search-icon").click(function () {
 
         if ($("#search-box-spot").css('display') == 'none') {
-            
+
             console.log("if");
             $("#location-icon-spot").hide();
             $("#name-spot").hide();
@@ -24,13 +24,13 @@ $(document).ready(function () {
             });
 
         } else {
-            
+
             $("#search-box-spot").hide("slow", function () {
                 $("#location-icon-spot").show();
-                 $("#name-spot").show();
+                $("#name-spot").show();
             });
         }
-});
+    });
 
 
 
