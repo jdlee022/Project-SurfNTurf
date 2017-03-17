@@ -232,6 +232,9 @@ function getPhotos() {
 /** When the user clicks a button to load a new place update the array of current pictures */
 $("#newPlace").on("click", function () {
     getNewPlace();
+    loadUserFav("Favorite Hike Spots", "#favHikeList");
+    loadUserFav("Favorite Surf Spots", "#favSurfList");
+    
 });
 
 $("#modalSearch").on("click", function () {
@@ -261,7 +264,7 @@ function infoHike(current) {
     console.log("<a href='" + current.url + "'>" + current.name + "</a>");
     dispLikes();
     currentName = $("#current-spot").html();
-    alreadyLiked(favoriteList, currentName, "#heartHike");
+    heartForFavPlace("#heartHike", favoriteList, currentName);
 }
 
 function getNewPlace() {
