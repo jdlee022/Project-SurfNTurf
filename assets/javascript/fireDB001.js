@@ -165,7 +165,7 @@ function saveFavLocal(favorite) {
         var favoriteArray = localStorage.getItem(favorite);
     }
     //start a new array in local storage and push new liked place to array
-    if ((favoriteArray === "[null]") || favoriteArray === undefined){
+    if ((favoriteArray == "[null]") | favoriteArray == undefined){
         var favoriteArray = [];
         favoriteArray.push(placeObj);
         favoriteArray = JSON.stringify(favoriteArray);
@@ -181,18 +181,18 @@ function saveFavLocal(favorite) {
         for (i = 0; i < favoriteArray.length; i++) {
             favPlace = favoriteArray[i];
             if (favPlace.name == placeName) {
-                placeExistsInArray = true;
+                var placeExistsInArray = true;
             } else {
-                placeExistsInArray = false;
+                var placeExistsInArray = false;
             }
-        }
-        if (placeExistsInArray !== true){
+            if (placeExistsInArray !== true){
                 favoriteArray.push(placeObj);
                 favoriteArray = JSON.stringify(favoriteArray);
                 localStorage.setItem(favorite, favoriteArray);
                 favoriteArray = localStorage.getItem(favorite);
                 favoriteArray = JSON.parse(favoriteArray);
                 favoriteList = favoriteArray;
+            }
         } 
     }    
 }
