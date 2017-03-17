@@ -31,32 +31,6 @@ When you have working code that you are ready to push:
 </head>
 
 <body>
-    <!--needed for google maps api?-->
-    <div id="map" class="hidden"></div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header text-center">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Unable to get your location!</h4>
-                </div>
-                <div class="modal-body text-center">
-                    <p>Please search a location (eg. 'La Jolla')</p>
-                    <input type="text" name="search" value="" id="modalInput">
-                </div>
-                <div class="modal-footer text-center">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" id="modalSearch">Search</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-
     <!-- Full Page Image Background Carousel Header -->
     <header id="myCarousel" class="carousel slide">
         <!-- Indicators -->
@@ -146,6 +120,30 @@ When you have working code that you are ready to push:
         </div>
         <button type="btn" id="newPlace">Next place</button>
     </div>
+
+
+    <!--needed for google maps api?-->
+    <div id="map" class="hidden"></div>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Unable to get your location!</h4>
+                </div>
+                <div class="modal-body text-center">
+                    <p>Please search a location (eg. 'San Diego')</p>
+                    <input type="text" name="search" value="" id="modalInput">
+                </div>
+                <div class="modal-footer text-center">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="modalSearch">Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 
 

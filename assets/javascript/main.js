@@ -34,14 +34,11 @@ var surfSpot = {
  * cycle and repeat.
  * 
  * TODO:
- * As of now the currentPlace is empty when the page initially loads, it doesn't update until
- * the newPlace button is pressed.
  * 
- * This is due to the fact that it takes the browser an average of 3 seconds to get the user's
- * location after they click "Allow". So we need to figure out how to show some sort of loading screen
- * while this happens and then load the first place returned by their location.
+ * See modal on-click/keypress functions: want a better way to start the newPlace function 
+ * rather than waiting 1sec, look into "object watch"
  * 
- * Use modals instead of prompt when can't get location.
+ * May need to disable geolocation for the time being. Figure out better way to prompt modal
  */
 
 
@@ -123,7 +120,7 @@ function initializePlaces(lat, lng) {
     var myQuery = 'hiking';
     //if we searched for a location then add it to search
     if (locationSearch.length > 1) {
-        myQuery = myQuery + ' in ' + locationSearch;
+        myQuery = myQuery + ' in ' + locationSearch.trim();
     }
     //set data that determines what is returned
     var textRequest = {
@@ -228,29 +225,37 @@ function getPhotos() {
         newItem.append("<div class='fill' style='background-image:url(" + currentPlace.photos[i] + ");'></div>");
         $(".carousel-inner").append(newItem);
         //add a carousel indicator for each photo
-        $(".carousel-indicators").append("<li data-target='#myCarousel' data-slide-to='"+i+"'></li>");
+        $(".carousel-indicators").append("<li data-target='#myCarousel' data-slide-to='" + i + "'></li>");
     }
 }
 
 /** When the user clicks a button to load a new place update the array of current pictures */
 $("#newPlace").on("click", function () {
-    getWeather(places[counter].lat, places[counter].lng, places[counter]);
-    getDetails(places[counter]);
-
-    counter = counter % (places.length - 1);
-    counter++;
+    getNewPlace();
 });
 
 $("#modalSearch").on("click", function () {
-    locationSearch = $("#modalInput").val();
+    locationSearch = $("#modalInput").val().trim();
     $("#modalInput").html("");
     $('#myModal').modal('hide');
     initializePlaces(0.0, 0.0);
-    // getWeather(places[counter].lat, places[counter].lng, places[counter]);
-    //counter++;
+    setTimeout(getNewPlace, 1000);
+
+});
+//do the same when enter is pressed
+$("#modalInput").keypress(function (e) {
+    if (e.which === 13) {
+        locationSearch = $("#modalInput").val().trim();
+        $("#modalInput").html("");
+        $('#myModal').modal('hide');
+        initializePlaces(0.0, 0.0);
+        setTimeout(getNewPlace, 1000);
+    }
 });
 
+
 //APPEND INFO in hike.html
+
 function infoHike(current) {
     $("#spot-name").html("<a id='current-spot' href='" + current.url + "' target='_blank'>" + current.name + "</a>");
     console.log("<a href='" + current.url + "'>" + current.name + "</a>");
@@ -259,7 +264,13 @@ function infoHike(current) {
     alreadyLiked(favoriteList, currentName, "#heartHike");
 }
 
-//PHOTOS OF PLACE
+function getNewPlace() {
+    getWeather(places[counter].lat, places[counter].lng, places[counter]);
+    getDetails(places[counter]);
+    counter = counter % (places.length - 1);
+    counter++;
+}
 
+$('#myModal').modal('show');
 //initialize data based on current location when page loads
 initMap();
