@@ -40,10 +40,11 @@ $("#heartHike").on("click", function () {
 //Get local storage fav list and display it
 $("#favSurfBtn").on("click", function(){ 
     loadUserFav("Favorite Surf Spots", "#favSurfList");
-})
+});
 
 $("#heartSurf").on("click", function () {
     //check in the list
+    //EDIT
     currentName = $("#current-spot").html(); 
     heartForFavPlace("#heartSurf", favoriteList, "Favorite Surf Spots",  currentName);
     likeCountFx("#heartSurf", "surf");
