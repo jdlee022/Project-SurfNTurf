@@ -1,6 +1,11 @@
-$(document).ready(function () {
+
+
+
+
+
+$(document).ready(function() {
     //toggle the favorites list off when page loads
-    $("#favoritesWrapper").toggle();
+    $( "#favoritesWrapper" ).toggle();
 
     //hide the favorites list
     $("#favList").click(function () {
