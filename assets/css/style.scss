@@ -172,8 +172,9 @@ h3#heartCount {
     position: fixed;
     top: 20px;
     left: 140px;
+    color: white;
+    text-shadow: 2px 2px 4px #000000;
 }
-
 
 button#newPlace {
     margin-left: 25%;
@@ -200,7 +201,7 @@ div#favoritesWrapper {
     
   top: 25px;
   left: 25px;
-  height: 230px;
+  height: 300px;
   width: 400px;
   border-radius: 10px;
   background-color: black;
@@ -215,7 +216,7 @@ div.favoritesHeaderText {
 
 div#favoritesContentArea {
     overflow: auto;
-    height: 160px;
+    height: 240px;
     padding-left: 10px;
 }
 
@@ -228,18 +229,21 @@ i {
 i.glyphicon-heart:hover {
     color: red;
     transition-duration: .5s;
+    cursor: pointer;
 }
 
 i.glyphicon-align-justify:hover {
     color: white;
     transition-duration: .5s;
+    cursor: pointer;
 }
 
 i.glyphicon-align-justify {
     position: fixed;
     top: 20px;
     left: 20px;
-
+    color: #c0bfbf;
+    text-shadow: 2px 2px 4px #000000;
 }
 
 i.glyphicon-heart {

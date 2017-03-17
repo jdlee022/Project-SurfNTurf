@@ -39,6 +39,8 @@ var surfSpot = {
  * rather than waiting 1sec, look into "object watch"
  * 
  * May need to disable geolocation for the time being. Figure out better way to prompt modal
+ * 
+ * Need an error image when a place was not found from search
  */
 
 
@@ -84,6 +86,7 @@ function getWeather(lat, lng, place) {
 
 /** Call this to get current location and store lat & lng in currentLot */
 function initMap() {
+    /* FIXME: Disable geolocation until we can figure out initial page load
     //if browser supports current location then store it in currentLot, else get from user input
     navigator.geolocation.getCurrentPosition(function (position) {
         locationSearch = "";
@@ -106,6 +109,8 @@ function initMap() {
     }, {
         timeout: 5000
     });
+    */
+    $('#myModal').modal('show');
 }
 
 /** gets places based on given lat & lng */
@@ -238,8 +243,8 @@ $("#modalSearch").on("click", function () {
     locationSearch = $("#modalInput").val().trim();
     $("#modalInput").html("");
     $('#myModal').modal('hide');
-    initializePlaces(0.0, 0.0);
-    setTimeout(getNewPlace, 1000);
+    initializePlaces(32.7157, -117.1611);
+    setTimeout(getNewPlace, 2000);
 
 });
 //do the same when enter is pressed
@@ -248,8 +253,8 @@ $("#modalInput").keypress(function (e) {
         locationSearch = $("#modalInput").val().trim();
         $("#modalInput").html("");
         $('#myModal').modal('hide');
-        initializePlaces(0.0, 0.0);
-        setTimeout(getNewPlace, 1000);
+        initializePlaces(32.7157, -117.1611);
+        setTimeout(getNewPlace, 2000);
     }
 });
 

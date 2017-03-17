@@ -1,5 +1,6 @@
 $(document).ready(function() {
     
+    $( "#favoritesWrapper" ).toggle();
     //hide the favorites list
 $( "#favList" ).click(function() {
   $( "#favoritesWrapper" ).toggle( "slow", function() {
