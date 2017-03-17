@@ -203,8 +203,8 @@ function detailsCallback(place, status) {
 
         currentPlace = places[counter - 1];
         $("#rating-info").html(currentPlace.rating);
-        console.log("currentPlace:");
-        console.log(currentPlace);
+        // console.log("currentPlace:");
+        // console.log(currentPlace);
         getPhotos();
         infoHike(currentPlace);
     }
@@ -288,7 +288,7 @@ $("#search-box").keypress(function (e) {
 
 function infoHike(current) {
     $("#spot-name").html("<a id='current-spot' href='" + current.url + "' target='_blank'>" + current.name + "</a>");
-    console.log("<a href='" + current.url + "'>" + current.name + "</a>");
+    // console.log("<a href='" + current.url + "'>" + current.name + "</a>");
     dispLikes();
     currentName = $("#current-spot").html();
     heartForFavPlace("#heartHike", favoriteList, currentName);

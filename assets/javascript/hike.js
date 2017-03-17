@@ -15,7 +15,7 @@ $(document).ready(function() {
 
         if ($("#search-box-spot").css('display') == 'none') {
 
-            console.log("if");
+            // console.log("if");
             $("#location-icon-spot").hide();
             $("#name-spot").hide();
             $("#search-box-spot").show("slow", function () {
