@@ -28,8 +28,9 @@ var favoriteList = localStorage.getItem("Favorite Hike Spots");
 likeCountFx("#heartSurf", "surf");
 
 //Get local storage fav list and display it
-loadUserFav("Favorite Hike Spots", "#favHikeList");
-loadUserFav("Favorite Surf Spots", "#favSurfList");
+$("#favHikeBtn").on("click", function(){ 
+    loadUserFav("Favorite Hike Spots", "#favHikeList");
+});
 
 $("#heartHike").on("click", function () {
     //check in the list 
