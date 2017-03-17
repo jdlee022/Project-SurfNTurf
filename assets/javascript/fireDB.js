@@ -229,6 +229,7 @@ function removePlace(list, name){
                 }
             } 
         }
+        UserlikedPlace = false;
     }
 }
 
