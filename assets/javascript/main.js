@@ -251,6 +251,7 @@ $("#modalSearch").on("click", function () {
     $("#modalInput").html("");
     $('#myModal').modal('hide');
     initializePlaces(32.7157, -117.1611);
+    $("body").addClass("loading");
     setTimeout(getNewPlace, 2000);
 
 });
@@ -261,6 +262,7 @@ $("#modalInput").keypress(function (e) {
         $("#modalInput").html("");
         $('#myModal').modal('hide');
         initializePlaces(32.7157, -117.1611);
+        $("body").addClass("loading");
         setTimeout(getNewPlace, 2000);
     }
 });
@@ -274,6 +276,7 @@ $("#search-box").keypress(function (e) {
             $("#name-spot").show();
         });
         initializePlaces(32.7157, -117.1611);
+        $("body").addClass("loading");
         setTimeout(getNewPlace, 2000);
         $("#search-box").val("");
     }
@@ -296,10 +299,7 @@ function getNewPlace() {
     getDetails(places[counter]);
     counter = counter % (places.length - 1);
     counter++;
+    $("body").removeClass("loading");
 }
-
-$('#myModal').modal('show');
-$("#modalInput").focus();
-$("#search-box").select();
 //initialize data based on current location when page loads
 initMap();
