@@ -291,7 +291,7 @@ function infoHike(current) {
     // console.log("<a href='" + current.url + "'>" + current.name + "</a>");
     dispLikes();
     currentName = $("#current-spot").html();
-    heartForFavPlace("#heartHike", favoriteList, currentName);
+    heartForFavPlace("#heartHike", favoriteList, "Favorite Hike Spots", currentName);
 }
 
 function getNewPlace() {
