@@ -121,8 +121,9 @@ img#location-icon {
 }
 
 img#current-weather.icon {
-    width: 60px;
-    height: 60px;
+    margin-left: auto;
+    margin-right: auto;
+    
 }
 
 div#name-spot {
@@ -136,20 +137,20 @@ display: block;
 h3#temp-info {
     margin-top: 10px;
     margin-left: 10px;
-    color: grey;
+    color: white;
 }
 
 h3#weather-info {
 
-    color: grey;
+    color:white;
     margin-bottom: 10px;
     margin-top: 10px;
-    margin-left: -10px;
+    margin-left: 3px;
 
 }
 
 h3#wind-info {
-    color: grey;
+    color: white;
     margin-top: 10px;
     margin-left: -10px;
     margin-bottom: 20px;
@@ -157,16 +158,16 @@ h3#wind-info {
 }
 
 h3#rating-info {
-    color: grey;
+    color: white;
     margin-top: 10px;
-    margin-left: 10px;
+    margin-left:9px;
     margin-bottom: 20px;
 }
 
-h3#spot-name {
+ h3#spot-name  {
     font-size: 150%;
     margin-bottom: 5%;
-    color: grey;
+    color: white;
 }
 
 h3#spot-name:hover {
@@ -268,19 +269,19 @@ i.glyphicon-heart {
 }
 
 
-a {
-    color: grey;
+ a {
+    color: whitesmoke; 
     text-decoration: none;
 
 }
 
-a:hover {
-    color:white;
+body a:hover {
+    color:lightgrey;
     text-decoration: none;
 }
 
 a:visited {
-    color: grey;
+    color: white;
     text-decoration: none;
 }
 

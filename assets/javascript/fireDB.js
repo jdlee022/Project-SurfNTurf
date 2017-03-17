@@ -25,8 +25,6 @@ var favoriteList = localStorage.getItem("Favorite Hike Spots");
 
 //When the heart is click on, i++ like counts:
 
-likeCountFx("#heartSurf", "surf");
-
 //Get local storage fav list and display it
 $("#favHikeBtn").on("click", function(){ 
     loadUserFav("Favorite Hike Spots", "#favHikeList");
@@ -38,6 +36,17 @@ $("#heartHike").on("click", function () {
     saveFavLocal("Favorite Hike Spots");
     likeCountFx("#heartHike", "hike");
 });
+
+$("#favSurfBtn").on("click", function(){ 
+    loadUserFav("Favorite Surf Spots", ".favoritesContentArea");
+})
+
+$("#heartSurf").on("click", function () {
+    //check in the list 
+    heartForFavPlace("#heartSurf", favoriteList, currentName);
+    saveFavLocal("Favorite Surf Spots");
+    likeCountFx("#heartSurf", "surf");
+})
 
 function likeCountFx(heartID, typeSpot) {
     // $(heartID).on("click", function () {
@@ -152,7 +161,9 @@ function saveFavLocal(favorite) {
             favoriteList = favoriteArray;   
         }
     }
-    loadUserFav("Favorite Hike Spots", "#favHikeList"); 
+    loadUserFav("Favorite Hike Spots", "#favHikeList");
+    loadUserFav("Favorite Surf Spots", ".favoritesContentArea"); 
+    
     //heartForFavPlace("#heartHike", favoriteList, currentName);
 } 
 
