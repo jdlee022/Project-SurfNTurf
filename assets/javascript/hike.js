@@ -1,7 +1,13 @@
+<<<<<<< HEAD
 $(document).ready(function () {
 
 
 
+=======
+$(document).ready(function() {
+    //toggle the favorites list off when page loads
+    $( "#favoritesWrapper" ).toggle();
+>>>>>>> d0ac3c709f680c4abea02e1b29cb772642eb8f32
     //hide the favorites list
     $("#favList").click(function () {
         $("#favoritesWrapper").toggle("slow", function () {
