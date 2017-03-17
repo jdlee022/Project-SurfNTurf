@@ -65,7 +65,7 @@ function likeCountFx(heartID, typeSpot) {
                     removePlace(favoriteList, currentName);
                     //UserlikedPlace = false;
                 }
-                console.log(likeCount)
+                // console.log(likeCount)
                 //push this back to the data count: 
                 database.ref("spotsInfo/" + typeSpot + "/" + currentName).set({
                     id: spotID,
@@ -108,7 +108,7 @@ function dispLikes() {
 function saveFavLocal(favorite) {
     placeName = $("#current-spot").html();
     url = currentPlace.url;
-    console.log(url);
+    // console.log(url);
     placeObj = {
         name: placeName,
         url: currentPlace.url,
@@ -129,11 +129,11 @@ function saveFavLocal(favorite) {
         UserlikedPlace = true;
     } else {
         favoriteArray = JSON.parse(favoriteArray);
-        console.log(typeof(favoriteArray));
-        console.log(favoriteArray.length);
+        // console.log(typeof(favoriteArray));
+        // console.log(favoriteArray.length);
         for (i = 0; i < favoriteArray.length; i++) {
             favPlace = favoriteArray[i];
-            console.log(favPlace);
+            // console.log(favPlace);
             //item in fav array exists and Found where current fav place in the fav array 
             if (favPlace.name == placeName) {
                 var placeExists = true;
@@ -162,8 +162,8 @@ function loadUserFav(listName, typeList) {
         var favList = localStorage.getItem(listName);     
         favList = JSON.parse(favList);
         $(typeList).text("");
-        console.log(favList);
-        console.log(typeof(favList));
+        // console.log(favList);
+        // console.log(typeof(favList));
         for (var i = 0; i < favList.length; i++) {
             place = favList[i];
             var newDiv = $("<div><a target='_blank' href='" + place.url + "'>" + place.name + "</a></div>");
@@ -175,18 +175,18 @@ function loadUserFav(listName, typeList) {
 function heartForFavPlace(heart, list, name){
     
     $(heart).removeClass("heartColor");
-    console.log(list);
+    // console.log(list);
     //check if list is string, if it is, parse to JSON format
     if (typeof(list) == "string"){
         list = JSON.parse(list);
     }
-    console.log(typeof(list));
+    // console.log(typeof(list));
     if (list !== null) {
         for (i = 0; i < list.length; i++) {
             favPlace = list[i];
-            console.log(favPlace);
-            console.log(favPlace.name);
-            console.log(name);
+            // console.log(favPlace);
+            // console.log(favPlace.name);
+            // console.log(name);
             if (favPlace.name === name ) {
                 $(heart).addClass("heartColor");
                 UserlikedPlace = true;
@@ -208,16 +208,16 @@ function removePlace(list, name){
     if (list !== null) {
         for (i = 0; i < list.length; i++) {
             favPlace = list[i];
-            console.log(favPlace);
-            console.log(favPlace.name);
-            console.log(name);
             if (favPlace.name === name ) {
-                var index = list.indexOf(i);
+                console.log("removing "+name);
+                var index = list.indexOf(favPlace);
                 if (index > -1){
-                    array.splice(index, 1);
+                    list.splice(index, 1);
                 }
             } 
         }
+        console.log("new list: ");
+        console.log(list);
     }
 }
 
