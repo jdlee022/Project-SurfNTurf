@@ -21,31 +21,13 @@ var currentName;
 //Store user's data in the storage:
 var favoriteList = localStorage.getItem("Favorite Hike Spots");
 
-
-
-//When the heart is click on, i++ like counts:
-
-//Get local storage fav list and display it
-$("#favHikeBtn").on("click", function(){ 
-    loadUserFav("Favorite Hike Spots", "#favHikeList");
-})
-
-$("#heartHike").on("click", function () {
-    //check in the list 
-    currentName = $("#current-spot").html();
-    heartForFavPlace("#heartHike", favoriteList, "Favorite Hike Spots",  currentName);
-    likeCountFx("#heartHike", "hike");
-});
-
 //Get local storage fav list and display it
 $("#favSurfBtn").on("click", function(){ 
     loadUserFav("Favorite Surf Spots", "#favSurfList");
 });
 
 $("#heartSurf").on("click", function () {
-    //check in the list
-    //EDIT
-    currentName = $("#current-spot").html(); 
+    currentName = $("#spotName").html(); 
     heartForFavPlace("#heartSurf", favoriteList, "Favorite Surf Spots",  currentName);
     likeCountFx("#heartSurf", "surf");
 });
@@ -53,9 +35,9 @@ $("#heartSurf").on("click", function () {
 
 //Initial display the current likes of a place when click next 
 function dispLikes() {
-    currentName = $("#current-spot").html();
+    currentName = $("#spotName").html();
     if (currentName !== "") {
-        var ref = database.ref("spotsInfo/hike");
+        var ref = database.ref("spotsInfo/surf");
         ref.once("value")
             .then(function (snapshot) {
             if (snapshot.child(currentName).exists()) {

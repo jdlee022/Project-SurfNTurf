@@ -108,12 +108,12 @@ function likeCountFx(heartID, typeSpot) {
         ref.once("value")
             .then(function (snapshot) {
             //Test if this place has info in db
-            //TODO: ERROR
             if (snapshot.child(currentName).exists()) {
                 //retrievve current like count 
                 likeCount = snapshot.child(currentName + "/likes").val();
                 spotID = snapshot.child(currentName + "/id").val();
                 //add one more like to current one:
+                //FIXME: Double likes at likeCount=0 
                 if (UserlikedPlace === false) {
                     likeCount++;
                     $(heartID).addClass("heartColor");
