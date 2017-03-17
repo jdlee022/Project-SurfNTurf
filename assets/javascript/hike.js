@@ -1,11 +1,38 @@
 $(document).ready(function () {
 
+
+
     //hide the favorites list
     $("#favList").click(function () {
         $("#favoritesWrapper").toggle("slow", function () {
 
         });
     });
+
+    //search bar control
+
+
+    $("#search-icon").click(function () {
+
+        if ($("#search-box-spot").css('display') == 'none') {
+            
+            console.log("if");
+            $("#location-icon-spot").hide();
+            $("#name-spot").hide();
+            $("#search-box-spot").show("slow", function () {
+
+            });
+
+        } else {
+            
+            $("#search-box-spot").hide("slow", function () {
+                $("#location-icon-spot").show();
+                 $("#name-spot").show();
+            });
+        }
+});
+
+
 
 
 

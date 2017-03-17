@@ -98,6 +98,14 @@ margin-top: 350px;
 
 }
 
+img#search-icon {
+    float: left;
+     max-height: 20px;
+   max-width: 20px;
+   opacity: 1;
+   margin-top: 17px;
+}
+
 img.icon {
    max-height: 50px;
    max-width: 50px;
@@ -119,7 +127,7 @@ img#current-weather.icon {
 
 div#name-spot {
 display: block;
-  width: 400px;
+  width: 370px;
   
 }
 
@@ -225,6 +233,8 @@ i {
     font-size: 250%;
 }
 
+
+
 i.glyphicon-heart:hover {
     color: red;
     transition-duration: .5s;
@@ -270,4 +280,16 @@ a:visited {
 
 a#hike-link {
     color: white;
+}
+
+#search-box-spot {
+    display: none;
+    max-width:370px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    
+}
+
+input[type="text"] {
+    font-size:25px;
 }
