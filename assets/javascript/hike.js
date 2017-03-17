@@ -1,8 +1,4 @@
 
-
-
-
-
 $(document).ready(function() {
     //toggle the favorites list off when page loads
     $( "#favoritesWrapper" ).toggle();
