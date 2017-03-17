@@ -2,12 +2,13 @@
 $(document).ready(function() {
     //toggle the favorites list off when page loads
     $( "#favoritesWrapper" ).toggle();
+
     //hide the favorites list
-    $("#favList").click(function () {
+    $("#favHikeBtn").click(function () {
         $("#favoritesWrapper").toggle("slow", function () {
 
         });
-    });
+});
 
     //search bar control
     $("#search-icon").click(function () {
@@ -28,7 +29,7 @@ $(document).ready(function() {
                 $("#location-icon-spot").show();
                 $("#name-spot").show();
             });
-        }
+        };
     });
 
 
@@ -43,11 +44,13 @@ $(document).ready(function() {
         $('body').css('background-image', 'url("https://fast-company-res.cloudinary.com/image/upload/fc/3039266-poster-p-1-your-windowless-cubicle-is-doing-horrible-things-for-your-sleep-and-mental-health.jpg")');
     });
 
-});
 
-$('#surf-title').hover(function () {
-    $('body').css('background-image', 'url("https://static.pexels.com/photos/35007/pexels-photo.jpg")');
-}, function () {
 
-    $('body').css('background-image', 'url("https://fast-company-res.cloudinary.com/image/upload/fc/3039266-poster-p-1-your-windowless-cubicle-is-doing-horrible-things-for-your-sleep-and-mental-health.jpg")');
+    $('#surf-title').hover(function () {
+        $('body').css('background-image', 'url("https://static.pexels.com/photos/35007/pexels-photo.jpg")');
+    }, function () {
+
+        $('body').css('background-image', 'url("https://fast-company-res.cloudinary.com/image/upload/fc/3039266-poster-p-1-your-windowless-cubicle-is-doing-horrible-things-for-your-sleep-and-mental-health.jpg")');
+    });
+
 });
