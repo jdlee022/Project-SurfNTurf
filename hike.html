@@ -39,7 +39,7 @@ When you have working code that you are ready to push:
             <li data-target="#myCarousel" data-slide-to="1"></li>
             <li data-target="#myCarousel" data-slide-to="2"></li>
             <li data-target="#myCarousel" data-slide-to="3"></li>
-            
+
         </ol>
 
         <!-- Wrapper for Slides -->
@@ -54,7 +54,7 @@ When you have working code that you are ready to push:
 
     </header>
 
-    
+
 
     <div id="favoritesWrapper">
         <div class="row">
@@ -66,7 +66,7 @@ When you have working code that you are ready to push:
             </div>
 
             <div class="col-xs-2 favoritesHeaderText">
-                
+
             </div>
 
         </div>
@@ -85,10 +85,19 @@ When you have working code that you are ready to push:
 
     <div class="container" id="content-box">
         <div class="row">
-            <div class="col-sm-1" id="location-icon-spot">
-                <img src="assets/images/location.png" id="location-icon">
+            <div class="col-xs-1" id="search-icon-spot">
+                <img src="assets/images/search.png" id="search-icon">
             </div>
-            <div class="col-sm-11" id="name-spot">
+            <div class="col-xs-1" id="location-icon-spot">
+                <img src="assets/images/location.png" id="location-icon">
+
+            </div>
+
+            <div class="col-xs-10" id="search-box-spot">
+                <input class="form-control" type="text" value="(press enter to search)" id="search-box">
+            </div>
+
+            <div class="col-xs-10" id="name-spot">
 
                 <h3 id="spot-name">Hike Spot</h3>
             </div>
@@ -122,23 +131,23 @@ When you have working code that you are ready to push:
     </div>
 
 
+
     <!--needed for google maps api?-->
     <div id="map" class="hidden"></div>
     <!-- Modal -->
     <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
-            <div class="modal-content">
+            <div class="modal-content text-center">
                 <div class="modal-header text-center">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Unable to get your location!</h4>
                 </div>
                 <div class="modal-body text-center">
-                    <p>Please search a location (eg. 'San Diego')</p>
-                    <input type="text" name="search" value="" id="modalInput">
-                </div>
-                <div class="modal-footer text-center">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" id="modalSearch">Search</button>
+                    <p>Please search a location (eg. 'San Diego') for hiking spots.</p>
+                    <input style="text-align: center" type="text" name="search" value="" id="modalInput">
+                    <br>
+                    <button style="margin-top:15px;" type="button" class="btn btn-default" data-dismiss="modal" id="modalSearch">Search</button>
                 </div>
             </div>
         </div>
@@ -166,7 +175,7 @@ When you have working code that you are ready to push:
     <script src="assets/javascript/main.js" type="text/javascript"></script>
     <script src="assets/javascript/hike.js" type="text/javascript"></script>
     <script src="assets/javascript/fireDB.js" type="text/javascript"></script>
-    
+
     <!--activaqte carousel-->
     <script>
         $('.carousel').carousel({
