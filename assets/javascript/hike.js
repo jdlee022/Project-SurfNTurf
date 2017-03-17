@@ -4,11 +4,11 @@ $(document).ready(function() {
     $( "#favoritesWrapper" ).toggle();
 
     //hide the favorites list
-    $("#favList").click(function () {
+    $("#favHikeBtn").click(function () {
         $("#favoritesWrapper").toggle("slow", function () {
 
         });
-    });
+});
 
     //search bar control
     $("#search-icon").click(function () {
@@ -29,7 +29,7 @@ $(document).ready(function() {
                 $("#location-icon-spot").show();
                 $("#name-spot").show();
             });
-        }
+        };
     });
 
 
