@@ -38,14 +38,14 @@ $("#heartHike").on("click", function () {
 
 $("#favSurfBtn").on("click", function(){ 
     loadUserFav("Favorite Surf Spots", ".favoritesContentArea");
-})
+});
 
 $("#heartSurf").on("click", function () {
     //check in the list 
     heartForFavPlace("#heartSurf", favoriteList, currentName);
     saveFavLocal("Favorite Surf Spots");
     likeCountFx("#heartSurf", "surf");
-})
+});
 
 
 
