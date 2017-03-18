@@ -19,7 +19,7 @@
   county: null,
   wind: null,
   windDirection: null,
-    surfHeight:null,
+  surfHeight:null,
   condition: null,
   waterTemp:null,
   tidesArray: [],
@@ -27,7 +27,7 @@
   heightArray: [],
   windArray: [],
   currentTide: null,
-    switch:false,
+  switch:false,
   }
 
   
@@ -57,25 +57,25 @@
     
   })
 
- function initCall(){
-        console.log(hour);
-        // month = moment().format('l').split("/")[0];     
-        // day = moment().format('l').split("/")[1];
-        // year = moment().format('l').split("/")[2];
-        //ajaxSurfHeightCall(9, hour);
+//  function initCall(){
+//         console.log(hour);
+//         // month = moment().format('l').split("/")[0];     
+//         // day = moment().format('l').split("/")[1];
+//         // year = moment().format('l').split("/")[2];
+//         //ajaxSurfHeightCall(9, hour);
         
-        // setHTML("Blacks", surfSpot.surfHeight, surfSpot.condition, surfSpot.wind, surfSpot.windDirection, surfSpot.waterTemp);
+//         // setHTML("Blacks", surfSpot.surfHeight, surfSpot.condition, surfSpot.wind, surfSpot.windDirection, surfSpot.waterTemp);
         
-        //ajaxWindCall("san-diego", hour);
-        //ajaxWaterTemp("san-diego");
-        //ajaxTide("san-diego");  
-        //$(".infoBar").show();
-        //$(".searchWrapper").addClass("clicked");
+//         //ajaxWindCall("san-diego", hour);
+//         //ajaxWaterTemp("san-diego");
+//         //ajaxTide("san-diego");  
+//         //$(".infoBar").show();
+//         //$(".searchWrapper").addClass("clicked");
 
-        detailArrowClick();
-        //setHTML("Blacks", surfSpot.surfHeight, surfSpot.condition, surfSpot.wind, surfSpot.windDirection, surfSpot.waterTemp);
-        $("spotName").html("Blacks");
- }
+//         detailArrowClick();
+//         //setHTML("Blacks", surfSpot.surfHeight, surfSpot.condition, surfSpot.wind, surfSpot.windDirection, surfSpot.waterTemp);
+//         $("spotName").html("Blacks");
+//  }
  
  // Saves all spot names in Spitcast API to be input into an array which is then used for autocomplete
  function autocompleteCall(day, month, year){
@@ -107,7 +107,7 @@
   }
   //CALL FUNCTIONS HERE
    autocompleteCall(day, month, year);
-   initCall();
+  //  initCall();
    
    // Will get information about the surf height and conditions
    // Uses Spitcast "forecast" endpoint.  The response array is arranged chronologically, with new information for each hour
@@ -123,13 +123,15 @@
        // saves the height at each interval of an hour to be added to heightArray
        // heightArray will generate the graph of surf height for an entire 24 hour period
        var height = response[i].size_ft;
+        // Adds just the surf height info to be used for graphing
+        surfSpot.heightArray.push(height);
+        console.log(height);
        // Gets the info for this specific hour
        if (response[i].hour == hour){
         surfSpot.surfHeight = response[i].size;
         surfSpot.condition = response[i].shape_detail.swell;
       }
-        // Adds just the surf height info to be used for graphing
-        surfSpot.heightArray.push(height);
+       
      }  
         // Sets available data to the page
         setHTML(surfSpot.name, surfSpot.surfHeight, surfSpot.condition, surfSpot.wind, surfSpot.windDirection, surfSpot.waterTemp);       
@@ -159,14 +161,15 @@
     for (i = 0; i < response.data.length; i++){
        //Saves wind speed for every hour to be used for graphing
        var wind = response.data[i].speed_mph;
+        // Adds the wind speed to the windArray which will be used to generate the daily graph
+        surfSpot.windArray.push(wind);
        // Gets wind information for the hour that the search is being executed
+    
        if (response.data[i].hour == hour){
         // Rounds the wind speed to the nearest whole number to maintain a clean interface
         surfSpot.wind = Math.round(response.data[i].speed_mph);
         surfSpot.windDirection = response.data[i].direction_degrees;
       }
-        // Adds the wind speed to the windArray which will be used to generate the daily graph
-        surfSpot.windArray.push(wind);
      }
     // Updates page with wind information
     setHTML(surfSpot.name, surfSpot.surfHeight, surfSpot.condition, surfSpot.wind, surfSpot.windDirection, surfSpot.waterTemp);   
@@ -507,78 +510,79 @@ function carouselInputChecker(userInput){
       }
        }
 
- function enterFunctionality(){
-    $('#searchText').keyup(function(event) {
-        if (event.keyCode == 13) {
-          userInput = $("#searchText").val().trim();
-          console.log(event);
-          console.log(userInput);
-          surfSpot.timeArray = [];
-          graphChecker = false;
-          detailArrowClick();
-          console.log("submit btn on click");
-          // Gets the value entered into the textbox
-          var userInput = $("#searchText").val().trim();
-            // Checks if the user didn't enter anything but still clicked "Submit"
-            // Will display an error and move elements on page accordingly
+//  function enterFunctionality(){
+//     $('#searchText').keyup(function(event) {
+//         if (event.keyCode == 13) {
+//           userInput = $("#searchText").val().trim();
+//           console.log(event);
+//           console.log(userInput);
+//           surfSpot.timeArray = [];
+//           graphChecker = false;
+//           detailArrowClick();
+//           console.log("submit btn on click");
+//           // Gets the value entered into the textbox
+//           var userInput = $("#searchText").val().trim();
+//             // Checks if the user didn't enter anything but still clicked "Submit"
+//             // Will display an error and move elements on page accordingly
           
-          console.log(userInput);
-          // $(".glyphicon-menu-down").removeClass("clicked");
-          $(".infoBar").removeClass("clicked");
+//           console.log(userInput);
+//           // $(".glyphicon-menu-down").removeClass("clicked");
+//           $(".infoBar").removeClass("clicked");
           
-          carouselInputChecker(userInput);
+//           carouselInputChecker(userInput);
         
-          $(".searchWrapper").removeClass("moveUp");
-          $("input").removeClass('clicked').toggleClass("inputDisappear");
-          $(".glyphicon-menu-down").removeClass("clicked");
-          $(".glyphicon.glyphicon-search").show();
-          $("input").addClass("clicked");
-          $("#emptyField").hide();
-          $("input").val("");
-          $("#myChart").hide();
-          $("infoBar").css("left", "20px");
-          $(".glyphicon-search").toggleClass("clicked");
+//           $(".searchWrapper").removeClass("moveUp");
+//           $("input").removeClass('clicked').toggleClass("inputDisappear");
+//           $(".glyphicon-menu-down").removeClass("clicked");
+//           $(".glyphicon.glyphicon-search").show();
+//           $("input").addClass("clicked");
+//           $("#emptyField").hide();
+//           $("input").val("");
+//           $("#myChart").hide();
+//           $("infoBar").css("left", "20px");
+//           $(".glyphicon-search").toggleClass("clicked");
          
-          for (i = 0; i < infoArray.length; i++){
-        // Checks the user's input against the list, comparing spot names
-        // Will set surfSpot objects' properties to values available in the "all" endpoint call used in the autocomplete AJAX call
-        if(userInput == infoArray[i].spot_name){
-          surfSpot.name = infoArray[i].spot_name;
-          surfSpot.county = infoArray[i].county_name;
-          surfSpot.lat = infoArray[i].latitude;
-          surfSpot.long = infoArray[i].longitude;
-          surfSpot.spotID = infoArray[i].spot_id;
-        }
-      }
+//           for (i = 0; i < infoArray.length; i++){
+//         // Checks the user's input against the list, comparing spot names
+//         // Will set surfSpot objects' properties to values available in the "all" endpoint call used in the autocomplete AJAX call
+//         if(userInput == infoArray[i].spot_name){
+//           surfSpot.name = infoArray[i].spot_name;
+//           surfSpot.county = infoArray[i].county_name;
+//           surfSpot.lat = infoArray[i].latitude;
+//           surfSpot.long = infoArray[i].longitude;
+//           surfSpot.spotID = infoArray[i].spot_id;
+//         }
+//       }
         
-        //gets the current hour to be passed to the ajax call, gets current conditions
-        var hour = moment().format('hA');
+//         //gets the current hour to be passed to the ajax call, gets current conditions
+//         var hour = moment().format('hA');
         
-        //  Gets surf height for spot searched at the hour it was searched
-        ajaxSurfHeightCall(surfSpot.spotID, hour);
+//         //  Gets surf height for spot searched at the hour it was searched
+//         ajaxSurfHeightCall(surfSpot.spotID, hour);
         
-        // Pushes available data to page
-        setHTML(surfSpot.name, surfSpot.surfHeight, surfSpot.condition, surfSpot.wind, surfSpot.windDirection, surfSpot.waterTemp);
-        // Formats the county name to be used in another AJAX call
-        // Forces lower case and changes spaces to a dash, ex. San Diego --> san-diego
-        var countyFormatted = surfSpot.county.replace(" ", "-").toLowerCase();
+//         // Pushes available data to page
+//         setHTML(surfSpot.name, surfSpot.surfHeight, surfSpot.condition, surfSpot.wind, surfSpot.windDirection, surfSpot.waterTemp);
+//         // Formats the county name to be used in another AJAX call
+//         // Forces lower case and changes spaces to a dash, ex. San Diego --> san-diego
+//         var countyFormatted = surfSpot.county.replace(" ", "-").toLowerCase();
         
-        ajaxWindCall(countyFormatted, hour);
-        ajaxWaterTemp(countyFormatted);
-        ajaxTide(countyFormatted);
-        // Last time html is updated with all available info
-        setHTML(surfSpot.name, surfSpot.surfHeight, surfSpot.condition, surfSpot.wind, surfSpot.windDirection, surfSpot.waterTemp);   
-        // Finally shows the infoBar that contains all the data from AJAX calls
-        $(".infoBar").show();
-        // Moves search area up to make room for data being displayed
-        $(".searchWrapper").addClass("clicked");
-        // Attaches a click event to the down arrow in info area
-        detailArrowClick();
+//         ajaxWindCall(countyFormatted, hour);
+//         ajaxWaterTemp(countyFormatted);
+//         ajaxTide(countyFormatted);
+//         // Last time html is updated with all available info
+//         setHTML(surfSpot.name, surfSpot.surfHeight, surfSpot.condition, surfSpot.wind, surfSpot.windDirection, surfSpot.waterTemp);   
+//         // Finally shows the infoBar that contains all the data from AJAX calls
+//         $(".infoBar").show();
+//         // Moves search area up to make room for data being displayed
+//         $(".searchWrapper").addClass("clicked");
+//         // Attaches a click event to the down arrow in info area
+//         detailArrowClick();
           
-        }
-    });
- };
- enterFunctionality();
+//         }
+//     });
+//  };
+//  enterFunctionality();
+  detailArrowClick();
 
     $("#submitBtn").on("click", function(){
       
@@ -659,12 +663,13 @@ function dayFormatter(day){
 function setHTML(spotName, surfHeight, condition, wind, windDirection, waterTemp){
   console.log(spotName);
   console.log("setHTML");
+  
   if (spotName == "null"){
     spotName = 'Blacks';
   };
   
   // Adds a location image with the user's entered spot name
-  $(".spotName").html("<i class = 'glyphicon glyphicon-map-marker'></i> <span id='spotName'>"+ spotName +  "</span>").addClass("h2");
+  $(".spotName").html("<i class = 'glyphicon glyphicon-map-marker'></i><span id='surf-current-spot' >"+ spotName +  "</span>").addClass("h2");
  
   // Adds a small wave icon as well as the surf height in feet
   $(".surfHeight").html("<img src = 'https://d30y9cdsu7xlg0.cloudfront.net/png/51723-200.png' height = '55px' width = '55px'><h2>" + surfHeight + " ft</h2>");

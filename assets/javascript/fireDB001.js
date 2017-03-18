@@ -26,7 +26,7 @@ infoSurf();
 
 $("#submitBtn").on("click", function(){
     loadUserFav("Favorite Surf Spots", "#favSurfList");
-    currentName = $("#spotName").html(); 
+    currentName = $("#surf-current-spot").html(); 
     heartForFavPlace("#heartSurf", favoriteList, "Favorite Surf Spots",  currentName);
     infoSurf();
 });
@@ -39,7 +39,7 @@ $("#favSurfBtn").on("click", function(){
 });
 
 $("#heartSurf").on("click", function () {
-    currentName = $("#spotName").html(); 
+    currentName = $("#surf-current-spot").html(); 
     heartForFavPlace("#heartSurf", favoriteList, "Favorite Surf Spots",  currentName);
     likeCountFx("#heartSurf", "surf");
 });
@@ -47,7 +47,7 @@ $("#heartSurf").on("click", function () {
 
 //Initial display the current likes of a place when click next 
 function dispLikes() {
-    currentName = $("#spotName").html();
+    currentName = $("#surf-current-spot").html();
     if (currentName !== "") {
         var ref = database.ref("spotsInfo/surf");
         ref.once("value")
@@ -64,7 +64,7 @@ function dispLikes() {
 
 function infoSurf() {
     dispLikes();
-    currentName = $("#spotName").html();
+    currentName = $("#surf-current-spot").html();
     heartForFavPlace("#heartHike", favoriteList, "Favorite Surf Spots", currentName);
 }
 //INITIAL display and CHECK SYSTEM using the localStorage 
@@ -100,7 +100,7 @@ function likeCountFx(heartID, typeSpot) {
     // $(heartID).on("click", function () {
         //heartForFavPlace("#heartHike", favoriteList, currentName);
         //get the current spot's name        
-        currentName = $("#spotName").html();
+        currentName = $("#surf-current-spot").html();
         //check if database has a path for this aready
         var ref = database.ref("spotsInfo/" + typeSpot);
         //take a snapshot of current data
@@ -117,14 +117,14 @@ function likeCountFx(heartID, typeSpot) {
                     likeCount++;
                     $(heartID).addClass("heartColor");
                     saveFavLocal("Favorite Surf Spots");
-                    currentName = $("#spotName").html();
+                    currentName = $("#surf-current-spot").html();
                     heartForFavPlace("#heartSurf", favoriteList, "Favorite Surf Spots",  currentName);// loadUserFav("Favorite Surf Spots", "#favHikeList");
                     loadUserFav("Favorite Surf Spots", "#favSurfList");
                 } else if (UserlikedPlace === true && likeCount !== 0){
                     likeCount--;
                     $(heartID).removeClass("heartColor") ;
                     removePlace(favoriteList, currentName, "Favorite Surf Spots");
-                    currentName = $("#spotName").html();
+                    currentName = $("#surf-current-spot").html();
                     heartForFavPlace("#heartHike", favoriteList,  "Favorite Surf Spots",  currentName);
                     loadUserFav("Favorite Surf Spots", "#favSurfList");
                 }
@@ -140,13 +140,13 @@ function likeCountFx(heartID, typeSpot) {
                 if (UserlikedPlace === false) {
                     $(heartID).addClass("heartColor");
                     saveFavLocal("Favorite Surf Spots");
-                    currentName = $("#spotName").html();
+                    currentName = $("#surf-current-spot").html();
                     heartForFavPlace("#heartSurf", favoriteList, "Favorite Surf Spots",  currentName);// loadUserFav("Favorite Surf Spots", "#favHikeList");
                     loadUserFav("Favorite Surf Spots", "#favSurfList");
                 } else if (UserlikedPlace === true && likeCount !== 0){
                     $(heartID).removeClass("heartColor") ;
                     removePlace(favoriteList, currentName, "Favorite Surf Spots");
-                    currentName = $("#spotName").html();
+                    currentName = $("#surf-current-spot").html();
                     heartForFavPlace("#heartHike", favoriteList,  "Favorite Surf Spots",  currentName);
                     loadUserFav("Favorite Surf Spots", "#favSurfList");
                 }
@@ -165,7 +165,7 @@ function likeCountFx(heartID, typeSpot) {
 
 //Add places and set UserlikedPlace to true
 function saveFavLocal(favorite) {
-    placeName = $("#spotName").html();
+    placeName = $("#surf-current-spot").html();
     placeObj = {
         name: placeName,
     };

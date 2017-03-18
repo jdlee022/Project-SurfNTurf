@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title> Surf </title>
+		<title> Surf App </title>
   
   <link rel = "stylesheet" type = "text/css" href = "assets/css/surf.css">
   <script src = "https://momentjs.com/downloads/moment.js"></script>
@@ -51,23 +51,22 @@
 			</div>
 
             </div>
-        
+        </div>
 	<div class = "content Wrapper">
     	<div class = "favoritesWrapper">
 			<div class = "row">
 				<div class = "col-sm-3">
 				<div class = "favoritesHeader">
 					<i class = "glyphicon glyphicon-align-justify"></i>
-					<i class = "glyphicon glyphicon-heart" id="heartSurf"></i> 
-					<h3 id="heartCount">0</h3>
+					<i class = "glyphicon glyphicon-heart" id = "heartSurf"></i> 
+					<h3 id = "heartCount">0 </h3>
 				</div>
 			</div>
 			</div>
 		<div class = "row">
 			<div class = "col-sm-3">
 				<div class = "favoritesContentArea" id="favSurfList">
-				<!--<img src = "https://cdn3.iconfinder.com/data/icons/water-sports-and-recreation-tours/512/Water_sports_and_recreation_tours_Surfing-512.png" height = "25px" width = "25px">-->
-				 Spot Name
+				<img src = "https://cdn3.iconfinder.com/data/icons/water-sports-and-recreation-tours/512/Water_sports_and_recreation_tours_Surfing-512.png" height = "25px" width = "25px"> Spot Name
 				</div>
 			</div>
 	</div>
@@ -109,7 +108,7 @@
 			 			  </div>
 			 		</div>
 				</div>
-				<canvas id="myChart" width="300px" height="300px"></canvas>
+				<canvas id="myChart" width="300px" height="300px" style = ""></canvas>
 
 				<i class = "glyphicon glyphicon-menu-down"> </i>
 	   		</div>
@@ -134,14 +133,14 @@
 	<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
 	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
 	<script type = "text/javascript" src = "assets/javascript/surf.js"></script>
- 
-  	<script>
-		$('.carousel').carousel({
-					interval: 5000 //changes the speed
-		})
+  <script>
+   $('.carousel').carousel({
+            interval: 5000 //changes the speed
+        })
     </script>
- 	<script src="assets/javascript/main.js" type="text/javascript"></script>
-    <script src="assets/javascript/fireDB001.js" type="text/javascript"></script> 
-</body>
+	<!--<script src="assets/javascript/main.js" type="text/javascript"></script>-->
+    <script src="assets/javascript/fireDB001.js" type="text/javascript"></script>
+  
+  </body>
 
 </html>

@@ -256,7 +256,7 @@ function loadUserFav(listName, typeList) {
         // console.log(typeof(favList));
         for (var i = 0; i < favList.length; i++) {
             place = favList[i];
-            var newDiv = $("<div><a target='_blank' href='" + place.url + "'>" + place.name + "</a></div>");
+            var newDiv = $("<div> <img src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQDvHKooQtuOlfLcbf5YPOTpL0YZyGxJQntFsNCsD3VBZEqEED1TuUgA' height = '25px' width = '25px'> <a target='_blank' href='" + place.url + "'>" + place.name + "</a></div>");
             $(typeList).append(newDiv);
         }
     } else {
