@@ -137,6 +137,19 @@ function likeCountFx(heartID, typeSpot) {
                 $("#heartCount").text(likeCount);
                 //if the database doesn't have that path:
             } else {
+                if (UserlikedPlace === false) {
+                    $(heartID).addClass("heartColor");
+                    saveFavLocal("Favorite Surf Spots");
+                    currentName = $("#spotName").html();
+                    heartForFavPlace("#heartSurf", favoriteList, "Favorite Surf Spots",  currentName);// loadUserFav("Favorite Surf Spots", "#favHikeList");
+                    loadUserFav("Favorite Surf Spots", "#favSurfList");
+                } else if (UserlikedPlace === true && likeCount !== 0){
+                    $(heartID).removeClass("heartColor") ;
+                    removePlace(favoriteList, currentName, "Favorite Surf Spots");
+                    currentName = $("#spotName").html();
+                    heartForFavPlace("#heartHike", favoriteList,  "Favorite Surf Spots",  currentName);
+                    loadUserFav("Favorite Surf Spots", "#favSurfList");
+                }
                 //create new path to that place id and like starts at 1
                 likeCount = 1;
                 database.ref("spotsInfo/" + typeSpot + "/" + currentName).set({
@@ -161,7 +174,7 @@ function saveFavLocal(favorite) {
         var favoriteArray = localStorage.getItem(favorite);
     }
     //start a new array in local storage and push new liked place to array
-    if ((favoriteArray == "[null]") | favoriteArray == undefined){
+    if ((favoriteArray == "[null]") || (favoriteArray == undefined)){
         var favoriteArray = [];
         favoriteArray.push(placeObj);
         favoriteArray = JSON.stringify(favoriteArray);
@@ -244,47 +257,3 @@ function loadUserFav(listName, typeList) {
         $(typeList).text("You don't have any favorites yet");
     }
 }
-//TODO: save in local storage value of like switch
-// function alreadyLiked(list, name, heart) {
-//     $(heart).removeClass("heartColor");
-//     console.log(list);
-//     //check if list is string, if it is, parse to JSON format
-//     if (typeof(list) == "string"){
-//         list = JSON.parse(list);
-//     }
-//     console.log(typeof(list));
-//     if (list !== null) {
-//         for (i = 0; i < list.length; i++) {
-//             favPlace = list[i];
-//             console.log(favPlace);
-//             console.log(favPlace.name);
-//             console.log(name);
-//             if (favPlace.name === name && favPlace.liked == true) {
-//                 $(heart).addClass("heartColor");
-//             } 
-//             else {
-//                 $(heart).removeClass("heartColor");
-//             }
-//         }
-//     }
-// }
-
-
-// function likedORunliked(list, name){
-//     //name == current name on page
-//     //list == favorite list in the local storage
-//     //when click on heart:
-//     if (typeof(list) == 'string'){
-//         list = JSON.parse(list);
-//     }    
-//     for (var i = 0; i < list.length; i++){
-//         place = list[i];
-//         if (place.name == name && place.liked == true){
-//             place.liked = false;
-//         } else if ( place.name == name && place.liked == false){
-//             place.liked = true;
-//         }
-//     }
-// }
-
-
