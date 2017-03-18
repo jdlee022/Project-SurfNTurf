@@ -109,6 +109,15 @@
 	opacity:0.8;
 	transition-delay:0.2s;
 }
+.heartColor {
+    color:red;
+}
+#heartCount{
+	position:absolute;
+	top: -22px;
+	right: -69px;
+	font-size: 32px;
+}
 .favoritesWrapper{
 	position:fixed;
 	left:12px;
@@ -124,9 +133,9 @@
 	overflow:auto;
 }
 .favoritesWrapper.clicked{
-	height:11%;
-	width:29%;
-	transition: height 3s;
+	height:55px;
+	width:320px;
+	transition: height 1s;
     transition-timing-function:ease-in-out;
 }
 .ui-widget-content .ui-state-focus
@@ -241,7 +250,7 @@ h1 .infoBar{
 	bottom:25px;
 	margin:20px;
 	width:320px;
-	height: 240px;
+	height: 210px;
 	-webkit-transition: height 1s; /* Safari */
     transition: height 1s;
 	-webkit-transition-timing-function: ease-in-out;
@@ -257,7 +266,7 @@ h1 .infoBar{
 }
 .spotName.h2{
 	color:white;
-	font-size:250%;
+	font-size:30px;
 	padding-right:10px;
 	margin-top:0;
 }
@@ -286,7 +295,7 @@ h2, h3{
 .searchWrapper{
 	clear:both;
 	position:fixed;
-	top:340px;
+	top:379px;
 	left:25px;
 	background-color: black;
 	opacity: 0.6;
@@ -303,13 +312,13 @@ h2, h3{
 	left:16px;
 }
 .searchWrapper.clicked{
-	/*top:55px;*/
-	transform: translateY(-100px);
-	transition: transform 0.7s ease-in-out;
+	
+	/*transform: translateY(-100px);*/
+	/*transition: transform 0.4s ease-in-out;*/
 	/*-webkit-transition: height 3s;*/
 }
 .searchWrapper.moveUp{
-	transform: translateY(-194px);
+	transform: translateY(-233px);
 	transition: transform 1s ease-in-out;
 }
 button{
@@ -357,7 +366,7 @@ canvas{
 	display:block;
 	text-align:center;
 	margin-top:5px;
-	top:205px;
+	top:178px;
 	left:142px;
 }
 .glyphicon.glyphicon-menu-down.clicked{
@@ -396,4 +405,30 @@ body {
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
-  -o-background-size: cover; }
+  -o-background-size: cover; 
+  }
+  .modal {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 ) 
+                url('http://i.stack.imgur.com/FhHRx.gif') 
+                50% 50% 
+                no-repeat;
+}
+
+/* When the body has the loading class, we turn
+   the scrollbar off with overflow:hidden */
+body.loading {
+    overflow: hidden;   
+}
+
+/* Anytime the body has the loading class, our
+   modal element will be visible */
+body.loading .modal {
+    display: block;
+}
