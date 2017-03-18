@@ -38,19 +38,19 @@ $(document).ready(function() {
 
     //change background image on hover
     $('#hike-title').hover(function () {
-        $('body').css('background-image', 'url("assets/images/hikeIndex.png")');
+        $('#hike-title-image').show();
     }, function () {
 
-        $('body').css('background-image', 'url("https://fast-company-res.cloudinary.com/image/upload/fc/3039266-poster-p-1-your-windowless-cubicle-is-doing-horrible-things-for-your-sleep-and-mental-health.jpg")');
+        $('#hike-title-image').hide();
     });
 
 
 
     $('#surf-title').hover(function () {
-        $('body').css('background-image', 'url("https://static.pexels.com/photos/35007/pexels-photo.jpg")');
+        $('#surf-title-image').show();
     }, function () {
 
-        $('body').css('background-image', 'url("https://fast-company-res.cloudinary.com/image/upload/fc/3039266-poster-p-1-your-windowless-cubicle-is-doing-horrible-things-for-your-sleep-and-mental-health.jpg")');
+       $('#surf-title-image').hide();
     });
 
 });
