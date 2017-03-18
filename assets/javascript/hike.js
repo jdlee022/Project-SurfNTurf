@@ -29,7 +29,7 @@ $(document).ready(function() {
                 $("#location-icon-spot").show();
                 $("#name-spot").show();
             });
-        };
+        }
     });
 
 

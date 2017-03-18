@@ -28,7 +28,7 @@ var favoriteList = localStorage.getItem("Favorite Hike Spots");
 //Get local storage fav list and display it
 $("#favHikeBtn").on("click", function(){ 
     loadUserFav("Favorite Hike Spots", "#favHikeList");
-})
+});
 
 $("#heartHike").on("click", function () {
     //check in the list 
@@ -147,7 +147,7 @@ function likeCountFx(heartID, typeSpot) {
                 $("#heartCount").text(likeCount);
                 //database.ref
             } //else
-        }) //function
+        }); //function
     
 }
 
