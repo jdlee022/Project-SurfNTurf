@@ -242,8 +242,6 @@ function getPhotos() {
 $("#newPlace").on("click", function () {
     getNewPlace();
     loadUserFav("Favorite Hike Spots", "#favHikeList");
-    loadUserFav("Favorite Surf Spots", "#favSurfList");
-    
 });
 
 $("#modalSearch").on("click", function () {

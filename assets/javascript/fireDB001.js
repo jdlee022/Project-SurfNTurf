@@ -12,14 +12,26 @@ var config = {
 firebase.initializeApp(config);
 var database = firebase.database();
 
-//Create new folders called 'hike' and 'surf' by importing fbpath.json file
+//Create new folders called 'Surf' and 'surf' by importing fbpath.json file
 //new var count the likes:
 var likeCount = null;
 var UserlikedPlace = false;
 var placeExistsInArray = false;
 var currentName;
 //Store user's data in the storage:
-var favoriteList = localStorage.getItem("Favorite Hike Spots");
+var favoriteList = localStorage.getItem("Favorite Surf Spots");
+
+loadUserFav("Favorite Surf Spots", "#favSurfList");
+infoSurf();
+
+$("#submitBtn").on("click", function(){
+    loadUserFav("Favorite Surf Spots", "#favSurfList");
+    currentName = $("#spotName").html(); 
+    heartForFavPlace("#heartSurf", favoriteList, "Favorite Surf Spots",  currentName);
+    infoSurf();
+});
+
+
 
 //Get local storage fav list and display it
 $("#favSurfBtn").on("click", function(){ 
@@ -50,6 +62,11 @@ function dispLikes() {
     }
 }
 
+function infoSurf() {
+    dispLikes();
+    currentName = $("#spotName").html();
+    heartForFavPlace("#heartHike", favoriteList, "Favorite Surf Spots", currentName);
+}
 //INITIAL display and CHECK SYSTEM using the localStorage 
 //ALSO assign UserlikedPlace here:
 function heartForFavPlace(heart,list, listName, name){
@@ -83,7 +100,7 @@ function likeCountFx(heartID, typeSpot) {
     // $(heartID).on("click", function () {
         //heartForFavPlace("#heartHike", favoriteList, currentName);
         //get the current spot's name        
-        currentName = $("#current-spot").html();
+        currentName = $("#spotName").html();
         //check if database has a path for this aready
         var ref = database.ref("spotsInfo/" + typeSpot);
         //take a snapshot of current data
@@ -99,17 +116,17 @@ function likeCountFx(heartID, typeSpot) {
                 if (UserlikedPlace === false) {
                     likeCount++;
                     $(heartID).addClass("heartColor");
-                    saveFavLocal("Favorite Hike Spots");
-                    currentName = $("#current-spot").html();
-                    heartForFavPlace("#heartHike", favoriteList, "Favorite Hike Spots",  currentName);// loadUserFav("Favorite Hike Spots", "#favHikeList");
-                    loadUserFav("Favorite Hike Spots", "#favHikeList");
+                    saveFavLocal("Favorite Surf Spots");
+                    currentName = $("#spotName").html();
+                    heartForFavPlace("#heartSurf", favoriteList, "Favorite Surf Spots",  currentName);// loadUserFav("Favorite Surf Spots", "#favHikeList");
+                    loadUserFav("Favorite Surf Spots", "#favSurfList");
                 } else if (UserlikedPlace === true && likeCount !== 0){
                     likeCount--;
                     $(heartID).removeClass("heartColor") ;
-                    removePlace(favoriteList, currentName, "Favorite Hike Spots");
-                    currentName = $("#current-spot").html();
-                    heartForFavPlace("#heartHike", favoriteList,  "Favorite Hike Spots",  currentName);
-                    loadUserFav("Favorite Hike Spots", "#favHikeList");
+                    removePlace(favoriteList, currentName, "Favorite Surf Spots");
+                    currentName = $("#spotName").html();
+                    heartForFavPlace("#heartHike", favoriteList,  "Favorite Surf Spots",  currentName);
+                    loadUserFav("Favorite Surf Spots", "#favSurfList");
                 }
                 // console.log(likeCount)
                 //push this back to the data count: 
@@ -135,12 +152,9 @@ function likeCountFx(heartID, typeSpot) {
 
 //Add places and set UserlikedPlace to true
 function saveFavLocal(favorite) {
-    placeName = $("#current-spot").html();
-    url = currentPlace.url;
-    // console.log(url);
+    placeName = $("#spotName").html();
     placeObj = {
         name: placeName,
-        url: currentPlace.url,
     };
     //retrieve favorteArray from localStorage:
     if (localStorage.getItem(favorite)) {
@@ -223,7 +237,7 @@ function loadUserFav(listName, typeList) {
         // console.log(typeof(favList));
         for (var i = 0; i < favList.length; i++) {
             place = favList[i];
-            var newDiv = $("<div><a target='_blank' href='" + place.url + "'>" + place.name + "</a></div>");
+            var newDiv = $("<div> <img src = 'https://cdn3.iconfinder.com/data/icons/water-sports-and-recreation-tours/512/Water_sports_and_recreation_tours_Surfing-512.png' height = '25px' width = '25px'>" + place.name + "</div>");
             $(typeList).append(newDiv);
         }
     } else {

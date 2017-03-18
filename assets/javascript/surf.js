@@ -664,7 +664,7 @@ function setHTML(spotName, surfHeight, condition, wind, windDirection, waterTemp
   };
   
   // Adds a location image with the user's entered spot name
-  $(".spotName").html("<i class = 'glyphicon glyphicon-map-marker'></i>"+ spotName).addClass("h2");
+  $(".spotName").html("<i class = 'glyphicon glyphicon-map-marker'></i> <span id='spotName'>"+ spotName +  "</span>").addClass("h2");
  
   // Adds a small wave icon as well as the surf height in feet
   $(".surfHeight").html("<img src = 'https://d30y9cdsu7xlg0.cloudfront.net/png/51723-200.png' height = '55px' width = '55px'><h2>" + surfHeight + " ft</h2>");
