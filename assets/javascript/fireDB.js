@@ -96,6 +96,14 @@ function heartForFavPlace(heart,list, listName, name){
     }
 }
 
+function infoHike(current) {
+    $("#spot-name").html("<a id='current-spot' href='" + current.url + "' target='_blank'>" + current.name + "</a>");
+    // console.log("<a href='" + current.url + "'>" + current.name + "</a>");
+    dispLikes();
+    currentName = $("#current-spot").html();
+    heartForFavPlace("#heartHike", favoriteList, "Favorite Hike Spots", currentName);
+}
+
 
 function likeCountFx(heartID, typeSpot) {
     // $(heartID).on("click", function () {

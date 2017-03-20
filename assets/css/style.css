@@ -12,7 +12,11 @@ body {
   height: 100%; }
 
 body {
-  background-image: url("https://fast-company-res.cloudinary.com/image/upload/fc/3039266-poster-p-1-your-windowless-cubicle-is-doing-horrible-things-for-your-sleep-and-mental-health.jpg");
+  background: url(http://i.imgur.com/1st1PiA.gif) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
   overflow: hidden; }
 
 .carousel,
@@ -72,7 +76,8 @@ h1#hike-title {
   top: 40%;
   left: 55%; }
 
-img#hike-title-image, img#surf-title-image {
+img#hike-title-image,
+img#surf-title-image {
   display: none;
   width: 100%;
   height: 100%; }
@@ -246,7 +251,12 @@ input[type="text"] {
   left: 0;
   height: 100%;
   width: 100%;
-  background: rgba(255, 255, 255, 0.8) url("https://cdn.oubly.net/img/premiumbusinesscards/loading.gif") 50% 50% no-repeat; }
+  background: url(http://i.imgur.com/1st1PiA.gif) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  overflow: hidden; }
 
 /* When the body has the loading class, we turn
    the scrollbar off with overflow:hidden */
