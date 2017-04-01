@@ -1,9 +1,12 @@
-# ${1:Surf N' Turf}
+# Surf N' Turf
 Surf N' Turf is a web application that allows users to search for nearby hiking and surfing spots while providing them with relevant information such as weather, rating, images, and map location as well as the option to save their favorite places.
 ## Team
 Jon Lee
+
 Melissa Nguyen
+
 Sean Naylor
+
 Tony Afacchini
 ## APIs
 Google Places - Used to get hiking locations, their photos, and ratings.
