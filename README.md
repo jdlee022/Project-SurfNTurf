@@ -15,4 +15,4 @@ Firebase - Used to store the amount of favorites a location has received from us
 Local storage - Used to store a user's favorite locations.
 ## Screenshots
 ![Hike Screenshot](assets/images/screenshot-hike.png)
-![Alt text](assets/images/screenshot-hike.png?raw=true)
+![Alt text](assets/images/screenshot-surf.png?raw=true)
