@@ -13,6 +13,8 @@ Spitcast API - Used to get the surfing specific information such as tides.
 SASS - CSS preprocessor used to style our frontend.  
 Firebase - Used to store the amount of favorites a location has received from users  
 Local storage - Used to store a user's favorite locations.
+## Installation
+We currently do not have the website running on a server, but you can run the web app by downloading the repo to your local machine and opening the index.html file in your browser.
 ## Screenshots
-![Hike Screenshot](assets/images/screenshot-hike.png)
+![Hike Screenshot](assets/images/screenshot-hike.png)  
 ![Alt text](assets/images/screenshot-surf.png?raw=true)
