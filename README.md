@@ -1,5 +1,4 @@
 # Surf N' Turf
-[surf-n-turf.herokuapp.com/](https://surf-n-turf.herokuapp.com/)
 
 Surf N' Turf is a web application that allows users to search for nearby hiking and surfing spots while providing them with relevant information such as weather, rating, images, and map location as well as the option to save their favorite places.
 ## Team
